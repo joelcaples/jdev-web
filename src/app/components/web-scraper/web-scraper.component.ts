@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WebRequestService } from 'src/app/services/web-request.service';
 import { HttpClient } from '@angular/common/http';
+import { WebResponse } from 'src/models/web-response.model';
 
 @Component({
   selector: 'web-scraper',
@@ -9,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class WebScraperComponent implements OnInit {
 
-  public results:string[]=[];
+  public responses:WebResponse[]=[];
 
   constructor(private webRequestService:WebRequestService, public http: HttpClient) { }
 
@@ -17,14 +18,15 @@ export class WebScraperComponent implements OnInit {
   }
 
   public go() {
-    this.results=[];
+    this.responses=[];
     this.GetWebRequestsSerial();
   }
 
   public async GetWebRequestsSerial() {
     for (let i:number=0;i<100;++i) {
+      let startTime=new Date();
       let result = await this.WebRequestPromise(); 
-      this.results.push(result);
+      this.responses.push(<WebResponse>({Value:result, StartTime:startTime, EndTime:new Date()}));
     }
   }
 
