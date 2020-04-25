@@ -17,10 +17,23 @@ export class RequestQueueComponent implements OnInit {
   }
 
   public go() {
-    this.values = [];
-    for(let i:number = 0;i<100;++i) {
-      this.values.push(this.valuesSerivice.calculate(i));
+    this.values=[];
+    this.GetValuesSerial();
+  }
+
+  public async GetValuesSerial() {
+    let finalResult = 0;
+    for (let i:number=0;i<100;++i) {
+      let result = await this.ValuesPromise(i,1); 
+      this.values.push(result);
     }
   }
 
+  public ValuesPromise(x:number, sec:number):Promise<Values> {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(this.valuesSerivice.calculate(x));
+      }, sec *1000);
+    });
+  }
 }
