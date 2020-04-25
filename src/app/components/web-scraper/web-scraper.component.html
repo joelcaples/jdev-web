@@ -1,9 +1,11 @@
 <p>Web Scraper</p>
 <input type="button" (click)="go()" value="Go!"/>
-<div class="div-table">
-    <div class="div-table-row" *ngFor="let response of responses">
-        <div class="div-table-col"><textarea> {{response.Value}}</textarea></div> 
-        <div class="div-table-col">{{response.StartTime}}</div> 
-        <div class="div-table-col">{{response.EndTime}}</div> 
+<div style="max-height: 200px; overflow-y: scroll;">
+    <div class="div-table">
+        <div class="div-table-row" *ngFor="let response of responses">
+            <div class="div-table-col"><textarea> {{response.Value}}</textarea></div> 
+            <div class="div-table-col">{{response.StartTime}}</div> 
+            <div class="div-table-col">{{response.EndTime}}</div> 
+        </div>
     </div>
 </div>

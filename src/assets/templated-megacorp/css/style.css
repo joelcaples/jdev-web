@@ -720,8 +720,8 @@ a:hover
 
 	#header-wrapper
 	{
-		background: url(../images/banner.jpg) no-repeat center top;
-		background-size: cover;
+		/* background: url(../images/banner.jpg) no-repeat center top;
+		background-size: cover; */
 		position: relative;
 	}
 	

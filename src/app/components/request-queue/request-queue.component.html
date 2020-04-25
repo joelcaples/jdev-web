@@ -1,11 +1,13 @@
 <p>Request Queue</p>
 <input type="button" (click)="go()" value="Go!"/>
-<div class="div-table">
-    <div class="div-table-row" *ngFor="let value of values">
-        <div class="div-table-col">{{value.Value}}</div> 
-        <div class="div-table-col">{{value.ValueSqrt}}</div> 
-        <div class="div-table-col">{{value.ValueSqared}}</div>
-        <div class="div-table-col">{{value.ValueCubed}}</div>
+<div style="max-height: 200px; overflow-y: scroll;">
+    <div class="div-table">
+        <div class="div-table-row" *ngFor="let value of values">
+            <div class="div-table-col">{{value.Value}}</div> 
+            <div class="div-table-col">{{value.ValueSqrt}}</div> 
+            <div class="div-table-col">{{value.ValueSqared}}</div>
+            <div class="div-table-col">{{value.ValueCubed}}</div>
+        </div>
     </div>
 </div>
 
