@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Values } from 'src/models/values.model';
+import { ValuesService } from 'src/app/services/values.service';
 
 @Component({
   selector: 'request-queue',
@@ -8,9 +9,9 @@ import { Values } from 'src/models/values.model';
 })
 export class RequestQueueComponent implements OnInit {
 
-  private values:Values[] = [];
+  public values:Values[] = [];
 
-  constructor() { }
+  constructor(private valuesSerivice:ValuesService) { }
 
   ngOnInit(): void {
   }
@@ -18,16 +19,8 @@ export class RequestQueueComponent implements OnInit {
   public go() {
     this.values = [];
     for(let i:number = 0;i<100;++i) {
-      this.values.push(this.calculate(i));
+      this.values.push(this.valuesSerivice.calculate(i));
     }
   }
 
-  public calculate(value:number):Values {
-    return <Values>({
-      Value:value,
-      ValueSqrt:Math.sqrt(value),
-      ValueSqared:Math.pow(value, 2),
-      ValueCubed:Math.pow(value, 3)
-    });
-  }
 }
