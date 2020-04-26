@@ -8,6 +8,7 @@ import { WebScraperComponent } from './app/components/web-scraper/web-scraper.co
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './app/components/header/header.component';
 import { PortletComponent } from './app/components/portlet/portlet.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PortletComponent } from './app/components/portlet/portlet.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
