@@ -1,11 +1,20 @@
-<p>Web Scraper</p>
+<p>Serial Http Requests</p>
 <input type="button" (click)="go()" value="Go!"/>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">Response</div> 
+    <div class="col-sm-3">Start Time</div> 
+    <div class="col-sm-3">End Time</div> 
+  </div>
+</div>
+
 <div style="max-height: 200px; overflow-y: scroll;">
-    <div class="div-table">
-        <div class="div-table-row" *ngFor="let response of responses">
-            <div class="div-table-col"><textarea> {{response.Value}}</textarea></div> 
-            <div class="div-table-col">{{response.StartTime}}</div> 
-            <div class="div-table-col">{{response.EndTime}}</div> 
-        </div>
+  <div class="container" *ngFor="let response of responses">
+    <div class="row">
+      <div class="col-sm-6"><textarea style="width:100%; height: 30px;"> {{response.Value}}</textarea></div> 
+      <div class="col-sm-3">{{response.StartTime | date:'hh:mm:ss.SS'}}</div> 
+      <div class="col-sm-3">{{response.EndTime | date:'hh:mm:ss.SS'}}</div> 
     </div>
+  </div>
 </div>

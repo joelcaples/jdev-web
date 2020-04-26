@@ -1,13 +1,23 @@
-<p>Request Queue</p>
+<p>Serial Observable Requests</p>
 <input type="button" (click)="go()" value="Go!"/>
-<div style="max-height: 200px; overflow-y: scroll;">
-    <div class="div-table">
-        <div class="div-table-row" *ngFor="let value of values">
-            <div class="div-table-col">{{value.Value}}</div> 
-            <div class="div-table-col">{{value.ValueSqrt}}</div> 
-            <div class="div-table-col">{{value.ValueSqared}}</div>
-            <div class="div-table-col">{{value.ValueCubed}}</div>
-        </div>
-    </div>
-</div>
 
+<div class="container">
+    <div class="row">
+      <div class="col-sm-3">Value</div> 
+      <div class="col-sm-3">Square Root</div> 
+      <div class="col-sm-3">Square</div> 
+      <div class="col-sm-3">Cube</div> 
+    </div>
+  </div>
+  
+  <div style="max-height: 200px; overflow-y: scroll;">
+    <div class="container" *ngFor="let value of values">
+    <div class="row">
+        <div class="col-sm-3">{{value.Value}}</div> 
+        <div class="col-sm-3">{{value.ValueSqrt}}</div> 
+      <div class="col-sm-3">{{value.ValueSqared}}</div> 
+      <div class="col-sm-3">{{value.ValueCubed}}</div> 
+    </div>
+  </div>
+</div>
+  

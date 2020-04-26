@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PortletComponent implements OnInit {
 
+  public mode:string="BLANK";
+  public asOfDate:Date=new Date();
+
   constructor() { }
 
   ngOnInit(): void {

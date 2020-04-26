@@ -28,7 +28,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/assets/styles.scss",
+              "src/assets/styles.css",
+              "src/assets/sb-admin/sb-admin-2.css",
+              "node_modules/font-awesome/css/font-awesome.css"
             ],
             "scripts": []
           },
@@ -92,7 +95,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/assets/styles.scss",
+              "src/assets/styles.css",
+              "src/assets/sb-admin/sb-admin-2.css",
+              "node_modules/font-awesome/css/font-awesome.css"
             ],
             "scripts": []
           }
