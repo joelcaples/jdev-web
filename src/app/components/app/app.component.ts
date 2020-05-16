@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MainMenuItemType } from 'src/app/shared/enums/entities.enum';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'jdev-web';
-  public pageMode:number=0;
+  //public pageMode:number=0;
+  public mainMenuItem:MainMenuItemType;
+  public MainMenuItemType=MainMenuItemType;
 }
