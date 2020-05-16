@@ -16,8 +16,12 @@
       <nav class="ph3">
         <h3>
           <span>
-            <a class="link mr3" href="#" (click)="mainMenuItem=MainMenuItemType.Widgets">Widgets</a>
-            <a class="link mr3" href="#" (click)="mainMenuItem=MainMenuItemType.Links">Links</a>
+            <!-- <a class="link mr3" href="#" (click)="mainMenuItem=MainMenuItemType.Widgets">Widgets</a>
+            <a class="link mr3" href="#" (click)="mainMenuItem=MainMenuItemType.Resources">Resources</a>
+            <a class="link mr3" href="#" (click)="mainMenuItem=MainMenuItemType.Tech">Tech</a> -->
+            <a class="link mr3" href="#" (click)="mainMenuItem=MainMenuItemType.Widgets" routerLink="/widgetdashboard">Widgets</a>
+            <a class="link mr3" href="#" (click)="mainMenuItem=MainMenuItemType.Resources" routerLink="/resources">Resources</a>
+            <a class="link mr3" href="#" (click)="mainMenuItem=MainMenuItemType.Tech" routerLink="/tech">Tech</a>
           </span>
         </h3>
         <ng-container *ngIf="mainMenuItem==MainMenuItemType.Widgets">

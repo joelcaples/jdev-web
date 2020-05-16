@@ -7,12 +7,18 @@ import { RequestQueueComponent } from './app/widgets/request-queue/request-queue
 import { WebScraperComponent } from './app/widgets/web-scraper/web-scraper.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TechComponent } from './app/components/tech/tech.component';
+import { ResourcesComponent } from './app/components/resources/resources.component';
+import { WidgetDashboardComponent } from './app/widgets/widget-dashboard/widget-dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RequestQueueComponent,
-    WebScraperComponent
+    WebScraperComponent,
+    TechComponent,
+    ResourcesComponent,
+    WidgetDashboardComponent
   ],
   imports: [
     BrowserModule,
