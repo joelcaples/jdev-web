@@ -1,10 +1,15 @@
-<div class="ph3 w-100 overflow-y-auto scroller" style="height:300px; background-color: lightgray;">
+<div class="ph3 w-100 overflow-y-auto scroller bg-dark-gray" style="height:300px;">
     <input type="button" (click)="go()" value="Go!"/>
-    <div class="div-table">
-        <div class="div-table-row" *ngFor="let response of responses">
-            <div class="div-table-col"><textarea> {{response.Value}}</textarea></div> 
-            <div class="div-table-col">{{response.StartTime}}</div> 
-            <div class="div-table-col">{{response.EndTime}}</div> 
+    <div class="dt-table">
+        <div class="dt-row ph3 w-100">
+            <div class="dtc ba pa1 b">Value</div> 
+            <div class="dtc ba pa1 b">StartTime</div> 
+            <div class="dtc ba pa1 b">EndTime</div> 
+        </div>
+        <div class="dt-row ph3 w-100" *ngFor="let response of responses">
+            <div class="dtc ba pa1"><textarea> {{response.Value}}</textarea></div> 
+            <div class="dtc ba pa1">{{response.StartTime}}</div> 
+            <div class="dtc ba pa1">{{response.EndTime}}</div> 
         </div>
     </div>
 </div>
