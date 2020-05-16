@@ -1,3 +1,54 @@
-<h1>app-component</h1>
-<web-scraper></web-scraper>
-<request-queue></request-queue>
+<nav class="border-box db dt-l w-100 pa3 ph5-l">
+  <a class="db dtc-l v-mid mid-gray link dim w-100 w-25-l tc tl-l mb2 mb0-l" href="#" title="Home">
+    <!-- <img src="http://tachyons.io/img/logo.jpg" class="dib w2 h2 br-100" alt="Site Name"> -->
+    Angry Lemonade Productions
+  </a>
+  <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
+    <a class="link dim dark-gray f6 f5-l dib mr3 mr4-l" href="#" title="Home">Home</a>
+    <a class="link dim dark-gray f6 f5-l dib mr3 mr4-l" href="#" title="About">About</a>
+  </div>
+</nav>
+
+<div class="flex flex-row ph3">
+  <div class="w-100 ph3 mr2">
+
+    <div class="border-box db dt-1 w-100 ph3 ph5-1">
+
+      <nav class="pl3">
+        <h3>Widgets</h3>
+        <a class="link dim gray f6 f5-ns dib mr3" href="#0" (click)="pageMode=0" title="Home">Web Scraper</a>
+        <a class="link dim gray f6 f5-ns dib mr3" href="#0" (click)="pageMode=1" title="About">Request Queue</a>
+      </nav>
+    
+      <div class="pl3 overflow-y-auto scroller" style="height:300px; background-color: lightgray;">
+        <web-scraper *ngIf="pageMode===0"></web-scraper>
+        <request-queue *ngIf="pageMode===1"></request-queue>
+      </div>
+    
+    </div>
+    
+  </div>
+  <!-- <div class="outline w-25 pa3 mr2">
+    <code>1</code>
+  </div>
+  <div class="outline w-25 pa3 mr2">
+    <code>2</code>
+  </div>
+  <div class="outline w-25 pa3 mr2">
+    <code>3</code>
+  </div>
+  <div class="outline w-25 pa3 mr2">
+    <code>4</code>
+  </div> -->
+</div>
+
+
+
+<footer class="pv4 ph3 ph5-m ph6-l mid-gray">
+    <small class="f6 db tc">© 2016 <b class="ttu">SOME COMPANY Inc</b>., All Rights Reserved</small>
+    <div class="tc mt3">
+      <a href="/language/" title="Language" class="f6 dib ph2 link mid-gray dim">Language</a>
+      <a href="/terms/"    title="Terms" class="f6 dib ph2 link mid-gray dim">Terms of Use</a>
+      <a href="/privacy/"  title="Privacy" class="f6 dib ph2 link mid-gray dim">Privacy</a>
+    </div>
+  </footer>
