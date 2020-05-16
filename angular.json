@@ -31,7 +31,7 @@
               "src/assets/styles.scss",
               "src/assets/styles.css",
               "src/assets/sb-admin/sb-admin-2.css",
-              "node_modules/font-awesome/css/font-awesome.css"
+              "src/assets/font-awesome-4.7.0/css/font-awesome.css"
             ],
             "scripts": []
           },
@@ -98,7 +98,7 @@
               "src/assets/styles.scss",
               "src/assets/styles.css",
               "src/assets/sb-admin/sb-admin-2.css",
-              "node_modules/font-awesome/css/font-awesome.css"
+              "src/assets/font-awesome-4.7.0/css/font-awesome.css"
             ],
             "scripts": []
           }
