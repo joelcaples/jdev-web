@@ -1,12 +1,26 @@
-<div class="ph3 w-100 overflow-y-auto scroller" style="height:300px; background-color: lightgray;">
+<div class="ph3 w-100 overflow-y-auto scroller bg-dark-gray" style="height:300px;;">
     <input type="button" (click)="go()" value="Go!"/>
-    <div class="div-table">
+    <div class="dt-table">
+        <div class="dt-row ph3 w-100">
+            <div class="dtc ba pa1 b">Value</div> 
+            <div class="dtc ba pa1 b">Sqrt</div> 
+            <div class="dtc ba pa1 b">Square</div>
+            <div class="dtc ba pa1 b">Cube</div>
+        </div>
+        <div class="dt-row ph3 w-100" *ngFor="let value of values">
+            <div class="dtc ba pa1">{{value.Value}}</div> 
+            <div class="dtc ba pa1">{{value.ValueSqrt}}</div> 
+            <div class="dtc ba pa1">{{value.ValueSqared}}</div>
+            <div class="dtc ba pa1">{{value.ValueCubed}}</div>
+        </div>
+    </div>
+<!-- <div class="div-table">
         <div class="div-table-row" *ngFor="let value of values">
             <div class="div-table-col">{{value.Value}}</div> 
             <div class="div-table-col">{{value.ValueSqrt}}</div> 
             <div class="div-table-col">{{value.ValueSqared}}</div>
             <div class="div-table-col">{{value.ValueCubed}}</div>
         </div>
-    </div>
+    </div> -->
 </div>
 

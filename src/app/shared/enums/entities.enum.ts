@@ -1,5 +1,6 @@
 export enum MainMenuItemType {
   Widgets,
   Resources,
-  Tech
+  Tech,
+  Undefined
 }

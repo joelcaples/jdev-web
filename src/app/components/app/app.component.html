@@ -1,11 +1,11 @@
 <nav class="border-box db dt-l w-100 pa3 ph5-l">
-  <a class="db dtc-l v-mid mid-gray link dim w-100 w-25-l tc tl-l mb2 mb0-l" href="#" title="Home">
+  <a class="db dtc-l v-mid silver link dim w-100 w-25-l tc tl-l mb2 mb0-l" href="#" title="Home">
     <!-- <img src="http://tachyons.io/img/logo.jpg" class="dib w2 h2 br-100" alt="Site Name"> -->
     Angry Lemonade Productions
   </a>
   <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
-    <a class="link dim dark-gray f6 f5-l dib mr3 mr4-l" href="#" title="Home">Home</a>
-    <a class="link dim dark-gray f6 f5-l dib mr3 mr4-l" href="#" title="About">About</a>
+    <a class="link dim silver f6 f5-l dib mr3 mr4-l" href="#" title="Home">Home</a>
+    <a class="link dim silver f6 f5-l dib mr3 mr4-l" href="#" title="About">About</a>
   </div>
 </nav>
 
@@ -21,9 +21,9 @@
             <a class="link mr3" href="#" (click)="mainMenuItem=MainMenuItemType.Tech" routerLink="/tech">Tech</a>
           </span>
         </h3>
-        <ng-container *ngIf="mainMenuItem==MainMenuItemType.Widgets">
-          <a class="link dim gray f6 f5-ns dib mr3" routerLink="/requestqueue">Web Scraper</a>
-          <a class="link dim gray f6 f5-ns dib mr3" routerLink="/webscraper">Request Queue</a>
+        <ng-container *ngIf="getCurrentRoute()==MainMenuItemType.Widgets">
+          <a class="link dim gray f6 f5-ns dib mr3" routerLink="/requestqueue">Request Queue</a>
+          <a class="link dim gray f6 f5-ns dib mr3" routerLink="/webscraper">Web Scraper</a>
         </ng-container>
       </nav>
 
