@@ -11,44 +11,27 @@
 
 <div class="flex flex-row ph3">
   <div class="w-100 ph3 mr2">
-
     <div class="border-box db dt-1 w-100 ph3 ph5-1">
 
-      <nav class="pl3">
+      <nav class="ph3">
         <h3>Widgets</h3>
-        <a class="link dim gray f6 f5-ns dib mr3" href="#0" (click)="pageMode=0" title="Home">Web Scraper</a>
-        <a class="link dim gray f6 f5-ns dib mr3" href="#0" (click)="pageMode=1" title="About">Request Queue</a>
+        <a class="link dim gray f6 f5-ns dib mr3" routerLink="/requestqueue">Web Scraper</a>
+        <a class="link dim gray f6 f5-ns dib mr3" routerLink="/webscraper">Request Queue</a>
       </nav>
-    
-      <div class="ph3 w-100 overflow-y-auto scroller" style="height:300px; background-color: lightgray;">
-        <web-scraper *ngIf="pageMode===0"></web-scraper>
-        <request-queue *ngIf="pageMode===1"></request-queue>
+
+      <div class="ph3">
+        <router-outlet></router-outlet>
       </div>
-    
+
     </div>
-    
   </div>
-  <!-- <div class="outline w-25 pa3 mr2">
-    <code>1</code>
-  </div>
-  <div class="outline w-25 pa3 mr2">
-    <code>2</code>
-  </div>
-  <div class="outline w-25 pa3 mr2">
-    <code>3</code>
-  </div>
-  <div class="outline w-25 pa3 mr2">
-    <code>4</code>
-  </div> -->
 </div>
 
-
-
 <footer class="pv4 ph3 ph5-m ph6-l mid-gray">
-    <small class="f6 db tc">© 2016 <b class="ttu">SOME COMPANY Inc</b>., All Rights Reserved</small>
-    <div class="tc mt3">
-      <a href="/language/" title="Language" class="f6 dib ph2 link mid-gray dim">Language</a>
-      <a href="/terms/"    title="Terms" class="f6 dib ph2 link mid-gray dim">Terms of Use</a>
-      <a href="/privacy/"  title="Privacy" class="f6 dib ph2 link mid-gray dim">Privacy</a>
-    </div>
-  </footer>
+  <small class="f6 db tc">© 2016 <b class="ttu">SOME COMPANY Inc</b>., All Rights Reserved</small>
+  <div class="tc mt3">
+    <a href="/language/" title="Language" class="f6 dib ph2 link mid-gray dim">Language</a>
+    <a href="/terms/"    title="Terms" class="f6 dib ph2 link mid-gray dim">Terms of Use</a>
+    <a href="/privacy/"  title="Privacy" class="f6 dib ph2 link mid-gray dim">Privacy</a>
+  </div>
+</footer>
