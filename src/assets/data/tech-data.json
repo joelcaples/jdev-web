@@ -1,8 +1,43 @@
 {  
-  "environments": [
-    "Bash",
-    "Windows",
-    "Linux",
-    "Docker"
+  "Sections":[
+    {
+      "Title":"News",
+      "Data":[
+        "Recode Decode"
+      ]
+    },
+    {
+      "Title":"Environments",
+      "Data":[
+        "Bash",
+        "Powershell",
+        "Windows",
+        "Linux",
+        "Docker"
+      ]
+    },
+    {
+      "Title":"Learn",
+      "Data": [
+        "Traversy Media",
+        "MDN",
+        "Stack Overflow"
+      ]
+    },
+    {
+      "Title":"Cloud",
+      "Data": [
+        "Azure"
+      ]
+    },
+    {
+      "Title":"Frameworks", 
+      "Data": [
+        "Angular",
+        "TypeScript",
+        ".Net Core",
+        "Regular Expressions"  
+      ]
+    }
   ]
 }

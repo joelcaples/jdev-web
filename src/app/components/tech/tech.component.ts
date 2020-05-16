@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TechDataService } from 'src/app/services/tech-data.service';
-import { TechData } from 'src/app/models/tech.model';
+import { Section } from 'src/app/models/tech.model';
 
 @Component({
   selector: 'app-tech',
@@ -9,15 +9,15 @@ import { TechData } from 'src/app/models/tech.model';
 })
 export class TechComponent implements OnInit {
 
-  public techData:TechData;
+  public sections:Section[];
 
   constructor(private techDataService:TechDataService) { }
 
   ngOnInit(): void {
     this.techDataService.getTechData()
     .subscribe(results => {
-        this.techData = results;
-        console.log(this.techData);
+        this.sections = results.Sections;
+        console.log(this.sections);
       });
   }
 

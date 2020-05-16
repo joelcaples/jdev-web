@@ -1,3 +1,8 @@
 export class TechData {
-  environments:string[];
+  Sections:Section[];
+}
+
+export class Section {
+  Title:string;
+  Data:string[];
 }

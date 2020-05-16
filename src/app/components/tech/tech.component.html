@@ -1,4 +1,8 @@
 <div>
-  <h3>Environments</h3>
-  <div *ngFor="let env of techData.environments">{{env}}</div>
+  <div *ngFor="let section of sections">
+    <h3>{{section.Title}}</h3>
+    <div class="ph3" *ngFor="let data of section.Data">
+      {{data}}
+    </div>
+  </div>
 </div>

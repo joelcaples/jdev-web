@@ -8,13 +8,9 @@ import { TechData } from '../models/tech.model';
 })
 export class TechDataService {
 
-  constructor(private http: HttpClient) {
-    // this.getJSON().subscribe(data => {
-    //     console.log(data);
-    // });
-  }
+  constructor(private http: HttpClient) {}
 
-  public getTechData() {
+  public getTechData():Observable<TechData> {
       return this.http.get<TechData>("./assets/data/tech-data.json");
   }
 
