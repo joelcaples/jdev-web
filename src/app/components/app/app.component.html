@@ -20,7 +20,7 @@
         <a class="link dim gray f6 f5-ns dib mr3" href="#0" (click)="pageMode=1" title="About">Request Queue</a>
       </nav>
     
-      <div class="pl3 overflow-y-auto scroller" style="height:300px; background-color: lightgray;">
+      <div class="ph3 w-100 overflow-y-auto scroller" style="height:300px; background-color: lightgray;">
         <web-scraper *ngIf="pageMode===0"></web-scraper>
         <request-queue *ngIf="pageMode===1"></request-queue>
       </div>
