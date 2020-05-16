@@ -6,6 +6,7 @@ import { AppComponent } from './app/components/app/app.component';
 import { RequestQueueComponent } from './app/components/request-queue/request-queue.component';
 import { WebScraperComponent } from './app/components/web-scraper/web-scraper.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
