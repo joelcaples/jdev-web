@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ComicsService } from 'src/app/services/comics.service';
+import { Series } from 'src/app/models/comics.series.model';
 
 @Component({
   selector: 'app-resources',
@@ -8,7 +9,7 @@ import { ComicsService } from 'src/app/services/comics.service';
 })
 export class ResourcesComponent implements OnInit {
 
-  public data:any;
+  public data:Series[];
 
   constructor(private comicsService:ComicsService) { }
 
