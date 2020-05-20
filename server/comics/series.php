@@ -19,7 +19,7 @@ if ($result = $mysqli->query($query)) {
   $i = 0;
   while($row = mysqli_fetch_assoc($result))
   {
-    $series[$i]['seriesID'] = $row['SeriesID'];
+    $series[$i]['seriesId'] = $row['SeriesID'];
     $series[$i]['seriesName'] = $row['SeriesName'];
     $i++;
   }

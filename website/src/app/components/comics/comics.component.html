@@ -2,12 +2,23 @@
   <div class="dt-row ph3 w-100">
     <div class="dtc pa1 b">Series: </div> 
     <div class="dtc pa1 b">
-      <select [(ngModel)]="selectedSeries">
+      <select [(ngModel)]="selectedSeries" (change)="selectedSeriesChanged()">
         <option *ngFor="let series of seriesList" [ngValue]="series">{{series.seriesName}}</option>
       </select> 
     </div> 
     <div class="dtc pa1 b">
       <p>{{selectedSeries?.seriesName}}</p>
+    </div> 
+  </div>
+  <div class="dt-row ph3 w-100">
+    <div class="dtc pa1 b">Issue: </div> 
+    <div class="dtc pa1 b">
+      <select [(ngModel)]="selectedIssue" (change)="selectedIssueChanged">
+        <option *ngFor="let issue of issues" [ngValue]="issue">{{issue.issueNumber}}</option>
+      </select> 
+    </div> 
+    <div class="dtc pa1 b">
+      <p>{{selectedIssue?.issueNumber}}</p>
     </div> 
   </div>
 </div>
