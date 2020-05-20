@@ -13,7 +13,7 @@ $mysqli = new mysqli(
 );
 
 $series = [];
-$query = "SELECT SeriesID, SeriesName FROM series WHERE 1";
+$query = "SELECT SeriesID, SeriesName FROM series";
 if ($result = $mysqli->query($query)) {
 
   $i = 0;

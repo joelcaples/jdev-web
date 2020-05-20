@@ -3,7 +3,6 @@
     <div class="dtc pa1 b">Series: </div> 
     <div class="dtc pa1 b">
       <select [(ngModel)]="selectedSeries">
-        <option>Select...</option>
         <option *ngFor="let series of seriesList" [ngValue]="series">{{series.seriesName}}</option>
       </select> 
     </div> 

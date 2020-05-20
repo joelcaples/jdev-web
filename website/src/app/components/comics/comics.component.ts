@@ -18,7 +18,17 @@ export class ComicsComponent implements OnInit {
   ngOnInit(): void {
     this.label="Series";
     this.comicsService.getComics().subscribe(results=>{
-      this.seriesList = results;
+      
+      this.seriesList = [];
+
+      let defaultSeries = new Series();
+      defaultSeries.seriesId=0;
+      defaultSeries.seriesName="Select...";
+      this.seriesList.push(defaultSeries);
+      this.selectedSeries = defaultSeries;
+
+      this.seriesList = this.seriesList.concat(results);
+
     },(e=>console.log(e)));
   }
 
