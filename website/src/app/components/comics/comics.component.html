@@ -2,13 +2,13 @@
   <div class="dt-row ph3 w-100">
     <div class="dtc pa1 b">Series: </div> 
     <div class="dtc pa1 b">
-      <select>
+      <select [(ngModel)]="selectedSeries">
         <option>Select...</option>
-        <option *ngFor="let series of seriesList" [value]="series.seriesId">{{series.seriesName}}</option>
+        <option *ngFor="let series of seriesList" [ngValue]="series">{{series.seriesName}}</option>
       </select> 
     </div> 
     <div class="dtc pa1 b">
-      <p>{{selectedSeriesId}}</p>
+      <p>{{selectedSeries?.seriesName}}</p>
     </div> 
   </div>
 </div>

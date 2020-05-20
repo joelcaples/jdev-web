@@ -10,7 +10,7 @@ import { Series } from 'src/app/models/comics.series.model';
 export class ComicsComponent implements OnInit {
 
   public seriesList:Series[];
-  public selectedSeriesId:number;
+  public selectedSeries:Series;
   public label:string;
 
   constructor(private comicsService:ComicsService) { }

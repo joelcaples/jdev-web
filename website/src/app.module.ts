@@ -11,6 +11,7 @@ import { TechComponent } from './app/components/tech/tech.component';
 import { ResourcesComponent } from './app/components/resources/resources.component';
 import { WidgetDashboardComponent } from './app/widgets/widget-dashboard/widget-dashboard.component';
 import { ComicsComponent } from './app/components/comics/comics.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ComicsComponent } from './app/components/comics/comics.component';
     ComicsComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
