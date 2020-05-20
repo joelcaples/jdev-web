@@ -6,6 +6,7 @@ import { WebScraperComponent } from 'src/app/widgets/web-scraper/web-scraper.com
 import { TechComponent } from 'src/app/components/tech/tech.component';
 import { ResourcesComponent } from 'src/app/components/resources/resources.component';
 import { WidgetDashboardComponent } from 'src/app/widgets/widget-dashboard/widget-dashboard.component';
+import { ComicsComponent } from 'src/app/components/comics/comics.component'
 
 const routes: Routes = [
   // { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'webscraper', component: WebScraperComponent },
   { path: 'tech', component: TechComponent },
   { path: 'resources', component: ResourcesComponent },
-  { path: 'widgetdashboard', component: WidgetDashboardComponent }
+  { path: 'widgetdashboard', component: WidgetDashboardComponent },
+  { path: 'comics', component: ComicsComponent }
 ];
 
 @NgModule({

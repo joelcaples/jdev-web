@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TechComponent } from './app/components/tech/tech.component';
 import { ResourcesComponent } from './app/components/resources/resources.component';
 import { WidgetDashboardComponent } from './app/widgets/widget-dashboard/widget-dashboard.component';
+import { ComicsComponent } from './app/components/comics/comics.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { WidgetDashboardComponent } from './app/widgets/widget-dashboard/widget-
     WebScraperComponent,
     TechComponent,
     ResourcesComponent,
-    WidgetDashboardComponent
+    WidgetDashboardComponent,
+    ComicsComponent
   ],
   imports: [
     BrowserModule,

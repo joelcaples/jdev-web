@@ -1,0 +1,14 @@
+<div class="dt-table">
+  <div class="dt-row ph3 w-100">
+    <div class="dtc pa1 b">Series: </div> 
+    <div class="dtc pa1 b">
+      <select>
+        <option>Select...</option>
+        <option *ngFor="let series of seriesList" [value]="series.seriesId">{{series.seriesName}}</option>
+      </select> 
+    </div> 
+    <div class="dtc pa1 b">
+      <p>{{selectedSeriesId}}</p>
+    </div> 
+  </div>
+</div>

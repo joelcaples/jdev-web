@@ -1,4 +1,4 @@
 export class Series {
-  seriesID: number;
+  seriesId: number;
   seriesName:string;
 }

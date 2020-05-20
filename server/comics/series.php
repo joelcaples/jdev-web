@@ -13,14 +13,14 @@ $mysqli = new mysqli(
 );
 
 $series = [];
-$query = "SELECT SeriesID, SeriesName FROM `series` WHERE 1";
+$query = "SELECT SeriesID, SeriesName FROM series WHERE 1";
 if ($result = $mysqli->query($query)) {
 
   $i = 0;
   while($row = mysqli_fetch_assoc($result))
   {
-    $series[$i]['SeriesID'] = $row['SeriesID'];
-    $series[$i]['SeriesName'] = $row['SeriesName'];
+    $series[$i]['seriesID'] = $row['SeriesID'];
+    $series[$i]['seriesName'] = $row['SeriesName'];
     $i++;
   }
 
