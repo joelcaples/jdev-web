@@ -1,3 +1,8 @@
+<p>{{this.selectedStoryArc?.storyArcId===undefined}}</p> 
+<p>{{this.selectedStoryArc?.storyArcId===null}}</p> 
+<p>{{this.selectedStoryArc?.storyArcId}}</p> 
+
+
 <div class="dt-table">
   <div class="dt-row ph3 w-100">
     <div class="dtc pa1 b">Series: </div> 
@@ -45,5 +50,18 @@
       <p>{{selectedStoryArc?.storyArcName}}</p>
     </div> 
   </div>
+
+  <ng-container *ngFor="let searchResultsRow of searchResults">
+    <div class="dt-row ph3 w-100">
+      <div class="dtc pa1 b">{{searchResultsRow.seriesName}}</div> 
+      <div class="dtc pa1 b">{{searchResultsRow.storyLineName}}</div> 
+      <div class="dtc pa1 b">{{searchResultsRow.storyArcName}}</div> 
+      <div class="dtc pa1 b">{{searchResultsRow.issueNumber}}</div> 
+      <!-- <div class="dtc pa1 b">{{searchResultsRow.filePath}}</div>  -->
+      <div class="dtc pa1 b">{{searchResultsRow.PageNumber}}</div> 
+      <div class="dtc pa1 b">{{searchResultsRow.PageType}}</div> 
+      <!-- <div class="dtc pa1 b">{{searchResultsRow.pageFileName}}</div>  -->
+    </div>
+  </ng-container>
 
 </div>

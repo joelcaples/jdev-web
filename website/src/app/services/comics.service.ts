@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { Issue } from '../models/comics.issue.model';
 import { Page } from '../models/comics.page.model';
 import { StoryArc } from '../models/comics.storyArc.model';
+import { SearchResultsRow } from '../models/comics.search-results-row.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,9 +33,27 @@ export class ComicsService {
     .pipe(map(results=><Page[]>results));
   }  
 
-  public getStoryArcs(pageId:number):Observable<StoryArc[]> {
+  public getStoryArcs(
+    pageId:number,    
+    seriesId:number,
+    issueId:number,
+    storyArcId:number,
+    storyLineId:number    
+  ):Observable<StoryArc[]> {
+
     return this.http
-    .get<StoryArc[]>(`http://localhost/server/comics/storyarcs.php?pageid=${pageId}`)
-    .pipe(map(results=><StoryArc[]>results));
+      .get<StoryArc[]>(`http://localhost/server/comics/storyarcs.php?pageid=${pageId>-1?pageId:""}&seriesid=${(seriesId>-1?seriesId:"")}&issueid=${(issueId>-1?issueId:"")}&storyarcid=${(storyArcId>-1?storyArcId:"")}&storylineid=${(storyLineId>-1?storyLineId:"")}`)
+      .pipe(map(results=><StoryArc[]>results));
+  }  
+
+  public search(
+    seriesId:number, 
+    issueId:number, 
+    storyArcId:number, 
+    storyLineId:number):Observable<SearchResultsRow[]> {
+    
+    return this.http
+    .get<SearchResultsRow[]>(`http://localhost/server/comics/search.php?seriesid=${(seriesId>-1?seriesId:"")}&issueid=${(issueId>-1?issueId:"")}&storyarcid=${(storyArcId>-1?storyArcId:"")}&storylineid=${(storyLineId>-1?storyLineId:"")}`)
+    .pipe(map(results=><SearchResultsRow[]>results));
   }  
 }

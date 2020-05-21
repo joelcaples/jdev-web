@@ -5,6 +5,7 @@ import { Issue } from 'src/app/models/comics.issue.model';
 import { forkJoin } from 'rxjs';
 import { Page } from 'src/app/models/comics.page.model';
 import { StoryArc } from 'src/app/models/comics.storyArc.model';
+import { SearchResultsRow } from 'src/app/models/comics.search-results-row.model';
 
 @Component({
   selector: 'app-comics',
@@ -22,6 +23,8 @@ export class ComicsComponent implements OnInit {
   public selectedPage:Page;
   public storyArcs:StoryArc[];
   public selectedStoryArc:StoryArc;
+  public searchResults:SearchResultsRow[];
+  public selectedSearchResultsRow:SearchResultsRow;
 
   constructor(private comicsService:ComicsService) { }
 
@@ -41,7 +44,7 @@ export class ComicsComponent implements OnInit {
       
       this.seriesList = [];
       let defaultSeries = new Series();
-      defaultSeries.seriesId=0;
+      defaultSeries.seriesId=-1;
       defaultSeries.seriesName="Select...";
       this.seriesList.push(defaultSeries);
       this.selectedSeries = defaultSeries;
@@ -61,7 +64,7 @@ export class ComicsComponent implements OnInit {
       
       this.issues = [];
       let defaultIssue = new Issue();
-      defaultIssue.issueId=0;
+      defaultIssue.issueId=-1;
       //defaultIssue.="Select...";
       this.issues.push(defaultIssue);
       this.selectedIssue = defaultIssue;
@@ -80,7 +83,7 @@ export class ComicsComponent implements OnInit {
     
       this.pages = [];
       let defaultPage = new Page();
-      defaultPage.issueId=0;
+      defaultPage.issueId=-1;
       //defaultIssue.="Select...";
       this.pages.push(defaultPage);
       this.selectedPage = defaultPage;
@@ -89,17 +92,22 @@ export class ComicsComponent implements OnInit {
     },(e=>console.log(e)));
   }
 
-  public loadStoryArcs(pageId:number) {
+  public loadStoryArcs() {
 
     forkJoin(
     [ 
-      this.comicsService.getStoryArcs(pageId)
+      this.comicsService.getStoryArcs(
+        this.selectedPage?.pageId, 
+        this.selectedSeries?.seriesId, 
+        this.selectedIssue?.issueId, 
+        -1, 
+        -1)
     ])
     .subscribe(([sa]: [StoryArc[]])  => {
     
       this.storyArcs = [];
       let defaultStoryArc = new StoryArc();
-      defaultStoryArc.storyArcId=0;
+      defaultStoryArc.storyArcId=-1;
       //defaultIssue.="Select...";
       this.storyArcs.push(defaultStoryArc);
       this.selectedStoryArc = defaultStoryArc;
@@ -108,25 +116,48 @@ export class ComicsComponent implements OnInit {
     },(e=>console.log(e)));
   }
 
+  public search() {
+
+    forkJoin(
+    [ 
+      this.comicsService.search(
+        this.selectedSeries?.seriesId === null ? -1 : this.selectedSeries.seriesId, 
+        this.selectedIssue?.issueId === null ? -1 : this.selectedIssue.issueId, 
+        // this.selectedStoryArc?.storyArcId === null ? -1 : this.selectedStoryArc.storyArcId, 
+        -1,
+        -1)
+    ])
+    .subscribe(([sr]: [SearchResultsRow[]])  => {
+    
+      this.searchResults = [];
+      this.searchResults = this.searchResults.concat(sr.slice(0,50));
+
+    },(e=>console.log(e)));
+  }
+
   public selectedSeriesChanged() {
     if(this.selectedSeries.seriesId > 0) {
       this.loadIssues(this.selectedSeries.seriesId);
     }
+    this.loadStoryArcs();
+    this.search();
   }
 
   public selectedIssueChanged() {
     if(this.selectedIssue.issueId > 0) {
       this.loadPages(this.selectedIssue.issueId);
     }
+    this.loadStoryArcs();
+    this.search();
   }
 
   public selectedPageChanged() {
-    if(this.selectedPage.pageId > 0) {
-      this.loadStoryArcs(this.selectedPage.pageId)
-    }
+    this.loadStoryArcs();
+    this.search();
   }
 
   public selectedStoryArcChanged() {
-    
+    this.search();
   }
+
 }

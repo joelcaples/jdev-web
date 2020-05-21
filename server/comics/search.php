@@ -8,7 +8,6 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 // include_once '../config/database.php';
 // include_once '../objects/product.php';
 
-$pageid=isset($_GET["pageid"]) ? $_GET["pageid"] : "";
 $seriesid=isset($_GET["seriesid"]) ? $_GET["seriesid"] : "";
 $issueid=isset($_GET["issueid"]) ? $_GET["issueid"] : "";
 $storyarcid=isset($_GET["storyarcid"]) ? $_GET["storyarcid"] : "";
@@ -26,34 +25,26 @@ $storylineid=isset($_GET["storylineid"]) ? $_GET["storylineid"] : "";
   );
 
   $pages = [];
-  $query = "SELECT 
-      -- pages.PageID,
-      -- pagestoryarcs.PageStoryArcID,
-      storyarcs.StoryArcID, 
-      storyarcs.StoryArcName, 
-      storyarcs.IsUnnamed, 
-      storyarcs.LastQuickPickDate,
-      storylines.StoryLineID,
-      storyarcs.LastQuickPickDate,
-      storyarcs.CreationDate, 
-      storyarcs.ModificationDate
-    FROM series 
-      INNER JOIN issues 
-      INNER JOIN pages 
-      INNER JOIN pagestoryarcs 
-      INNER JOIN storyArcs 
-      INNER JOIN storylines 
-      ON storyArcs.StoryLineID = storylines.StoryLineID 
-      ON pageStoryArcs.StoryArcID = storyarcs.StoryArcID 
-      ON pages.PageId = pageStoryArcs.PageId 
-      ON issues.IssueID = pages.IssueID 
-      ON series.SeriesID = issues.SeriesID 
-    WHERE 1";
+  $query = "SELECT
+              series.SeriesID, series.SeriesName,
+              issues.IssueID, issues.IssueNumber, issues.FilePath,
+              pages.PageID, pages.PageNumber, pages.PageType, Pages.PageFileName,
+              storyarcs.StoryArcID, storyarcs.StoryArcName, storyarcs.IsUnnamed, 
+              storyarcs.LastQuickPickDate, 
+              storylines.StoryLineID,storylines.StoryLineName
+            FROM series
+            INNER JOIN issues 
+            INNER JOIN pages
+            INNER JOIN pagestoryarcs 
+            INNER JOIN storyArcs
+            INNER JOIN storylines
+            ON storyArcs.StoryLineID = storylines.StoryLineID 
+            ON pageStoryArcs.StoryArcID = storyarcs.StoryArcID 
+            ON pages.PageId = pageStoryArcs.PageId
+            ON issues.IssueID = pages.IssueID
+            ON series.SeriesID = issues.SeriesID
+            WHERE 1";
 
-  if($pageid != "") {
-    $query = $query." AND pagestoryarcs.PageID = ".$pageid; 
-  }
-          
   if($seriesid != "") {
     $query = $query." AND series.SeriesID = ".$seriesid; 
   }
@@ -70,32 +61,38 @@ $storylineid=isset($_GET["storylineid"]) ? $_GET["storylineid"] : "";
     $query = $query." AND storyLines.StoryLineID = ".$storylineid; 
   }
 
-  $query = $query." GROUP BY
-	storyarcs.StoryArcID, 
-	storyarcs.StoryArcName, 
-	storyarcs.IsUnnamed, 
-  storylines.StoryLineID,
-	storyarcs.LastQuickPickDate,
-	storyarcs.CreationDate, 
-	storyarcs.ModificationDate
-ORDER BY issues.IssueNumber, pages.PageNumber, storyarcs.StoryArcName, storylines.StoryLineName 
-";
-
-// echo $query;
+  $query = $query." ORDER BY 
+    series.seriesName,
+    storylines.StoryLineName,
+    issues.IssueNumber,
+    storyarcs.StoryArcName,
+    pages.PageNumber
+    LIMIT 100";
 
   if ($result = $mysqli->query($query)) {
 
     $i = 0;
     while($row = mysqli_fetch_assoc($result)) {
-      // $pages[$i]['pageStoryArcId'] = $row['PageStoryArcID'];
-      // $pages[$i]['pageId'] = $row['PageID'];
+      $pages[$i]['seriesId'] = $row['SeriesID'];
+      $pages[$i]['seriesName'] = $row['SeriesName'];
+
+      $pages[$i]['issueId'] = $row['IssueID'];
+      $pages[$i]['issueNumber'] = $row['IssueNumber'];
+      $pages[$i]['filePath'] = $row['FilePath'];
+
+      $pages[$i]['pageId'] = $row['PageID'];
+      $pages[$i]['pageNumber'] = $row['PageNumber'];
+      $pages[$i]['pageType'] = $row['PageType'];
+      $pages[$i]['pageFileName'] = $row['PageFileName'];
+
       $pages[$i]['storyArcId'] = $row['StoryArcID'];
-      $pages[$i]['storyLineId'] = $row['StoryLineID'];
       $pages[$i]['storyArcName'] = $row['StoryArcName'];
       $pages[$i]['isUnnamed'] = $row['IsUnnamed'];
       $pages[$i]['lastQuickPickDate'] = $row['LastQuickPickDate'];
-      $pages[$i]['creationDate'] = $row['CreationDate'];
-      $pages[$i]['modificationDate'] = $row['ModificationDate'];
+
+      $pages[$i]['storyLineId'] = $row['StoryLineID'];
+      $pages[$i]['storyLineName'] = $row['StoryLineName'];
+
       $i++;
     }
       
