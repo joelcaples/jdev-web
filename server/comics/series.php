@@ -13,7 +13,8 @@ $mysqli = new mysqli(
 );
 
 $series = [];
-$query = "SELECT SeriesID, SeriesName FROM series";
+$query = "SELECT SeriesID, SeriesName FROM series
+LIMIT 200";
 if ($result = $mysqli->query($query)) {
 
   $i = 0;

@@ -1,14 +1,43 @@
-<p>{{this.selectedStoryArc?.storyArcId===undefined}}</p> 
-<p>{{this.selectedStoryArc?.storyArcId===null}}</p> 
-<p>{{this.selectedStoryArc?.storyArcId}}</p> 
+<!-- <div class="kt-portlet">
+  <div class="kt-portlet__head">
+    <div class="kt-portlet__head-label">
+      <h3 class="kt-portlet__head-title">Dropdown options</h3>
+    </div>
+  </div>
+  <div class="kt-portlet__body">
+    <div class="kt-section">
+      <div class="kt-section__info">
+        Use <code>data-offset</code> or <code>data-reference</code> to change the location of the dropdown.
+      </div>
+      <div class="kt-section__content kt-section__content--border">
+        <div class="d-flex">
+          <div class="dropdown mr-1">
+            <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+              Offset
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
 
 
 <div class="dt-table">
   <div class="dt-row ph3 w-100">
     <div class="dtc pa1 b">Series: </div> 
     <div class="dtc pa1 b">
-      <select [(ngModel)]="selectedSeries" (change)="selectedSeriesChanged()">
-        <option *ngFor="let series of seriesList" [ngValue]="series">{{series.seriesName}}</option>
+      <select [(ngModel)]="selectedSeries" style="width: 100%;" (ngModelChange)="selectedSeriesChanged($event)">
+        <option disabled value="undefined" >Select...</option>
+        <option *ngFor="let series of seriesList" [ngValue]="series">{{series.getDisplayValue()}}</option>
       </select> 
     </div> 
     <div class="dtc pa1 b">
@@ -18,8 +47,9 @@
   <div class="dt-row ph3 w-100">
     <div class="dtc pa1 b">Issue: </div> 
     <div class="dtc pa1 b">
-      <select [(ngModel)]="selectedIssue" (change)="selectedIssueChanged()">
-        <option *ngFor="let issue of issues" [ngValue]="issue">{{issue.issueNumber}}</option>
+      <select [(ngModel)]="selectedIssue" style="width: 100%;" (ngModelChange)="selectedIssueChanged($event)" >
+        <option disabled value="undefined" >Select...</option>
+        <option *ngFor="let issue of issues" [ngValue]="issue" >{{issue.getDisplayValue()}}</option>
       </select> 
     </div> 
     <div class="dtc pa1 b">
@@ -27,29 +57,42 @@
     </div> 
   </div>
 
-  <div class="dt-row ph3 w-100">
+  <!-- <div class="dt-row ph3 w-100">
     <div class="dtc pa1 b">Page: </div> 
     <div class="dtc pa1 b">
-      <select [(ngModel)]="selectedPage" (change)="selectedPageChanged()">
+      <select [(ngModel)]="selectedPage" (change)="selectedPageChanged()" style="width: 100%;">
         <option *ngFor="let page of pages" [ngValue]="page">{{page.pageNumber}}</option>
       </select> 
     </div> 
+  </div> -->
+
+  <div class="dt-row ph3 w-100">
+    <div class="dtc pa1 b">Story Line: </div> 
     <div class="dtc pa1 b">
-      <p>{{selectedPage?.pageNumber}}</p>
+      <select [(ngModel)]="selectedStoryLine" (ngModelChange)="selectedStoryLineChanged($event)" style="width: 100%;">
+        <option value="undefined" >Select...</option>
+        <option *ngFor="let storyLine of storyLines" [ngValue]="storyLine" >{{storyLine.getDisplayValue()}}</option>
+      </select> 
+    </div> 
+    <div class="dtc pa1 b">
+      <p>{{selectedStoryLine?.storyLineName}}</p>
     </div> 
   </div>
 
   <div class="dt-row ph3 w-100">
     <div class="dtc pa1 b">Story Arc: </div> 
     <div class="dtc pa1 b">
-      <select [(ngModel)]="selectedStoryArc" (change)="selectedStoryArcChanged()">
-        <option *ngFor="let storyArc of storyArcs" [ngValue]="storyArc">{{storyArc.storyArcName}}</option>
+      <select [(ngModel)]="selectedStoryArc" (ngModelChange)="selectedStoryArcChanged($event)" style="width: 100%;">
+        <option value="undefined" >Select...</option>
+        <option *ngFor="let storyArc of storyArcs" [ngValue]="storyArc">{{storyArc.getDisplayValue()}}</option>
       </select> 
     </div> 
     <div class="dtc pa1 b">
       <p>{{selectedStoryArc?.storyArcName}}</p>
     </div> 
   </div>
+
+<hr>
 
   <ng-container *ngFor="let searchResultsRow of searchResults">
     <div class="dt-row ph3 w-100">

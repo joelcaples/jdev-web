@@ -7,6 +7,7 @@ import { Issue } from '../models/comics.issue.model';
 import { Page } from '../models/comics.page.model';
 import { StoryArc } from '../models/comics.storyArc.model';
 import { SearchResultsRow } from '../models/comics.search-results-row.model';
+import { StoryLine } from '../models/comics.story-line.model';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,19 @@ export class ComicsService {
     return this.http
     .get<Page[]>(`http://localhost/server/comics/pages.php?issueid=${issueId}`)
     .pipe(map(results=><Page[]>results));
+  }  
+
+  public getStoryLines(
+    pageId:number,    
+    seriesId:number,
+    issueId:number,
+    storyLineId:number,
+    storyArcId:number    
+  ):Observable<StoryLine[]> {
+
+    return this.http
+      .get<StoryLine[]>(`http://localhost/server/comics/storylines.php?pageid=${pageId>-1?pageId:""}&seriesid=${(seriesId>-1?seriesId:"")}&issueid=${(issueId>-1?issueId:"")}&storyarcid=${(storyArcId>-1?storyArcId:"")}&storylineid=${(storyLineId>-1?storyLineId:"")}`)
+      .pipe(map(results=><StoryLine[]>results));
   }  
 
   public getStoryArcs(

@@ -7,4 +7,12 @@ export class Page {
   creationDate:Date;
   modificationDate:Date;
   fileId:number;
+  displayValue:string;
+
+  public getDisplayValue(){
+    if(this.displayValue)
+      return this.displayValue;
+
+    return this.pageId?.toString();
+  }
 }

@@ -67,7 +67,7 @@ $storylineid=isset($_GET["storylineid"]) ? $_GET["storylineid"] : "";
     issues.IssueNumber,
     storyarcs.StoryArcName,
     pages.PageNumber
-    LIMIT 100";
+    LIMIT 500";
 
   if ($result = $mysqli->query($query)) {
 

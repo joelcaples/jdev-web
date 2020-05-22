@@ -8,4 +8,12 @@ export class StoryArc {
   lastQuickPickDate:Date;
   creationDate:Date;
   modificationDate:Date;
+  displayValue:string;
+
+  public getDisplayValue(){
+    if(this.displayValue)
+      return this.displayValue;
+
+    return this.storyArcName?.toString();
+  }
 }

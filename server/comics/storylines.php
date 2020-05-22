@@ -1,3 +1,4 @@
+
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: PUT, GET, POST, DELETE");
@@ -27,14 +28,8 @@ $storylineid=isset($_GET["storylineid"]) ? $_GET["storylineid"] : "";
 
   $pages = [];
   $query = "SELECT 
-      storyarcs.StoryArcID, 
-      storyarcs.StoryArcName, 
-      storyarcs.IsUnnamed, 
-      storyarcs.LastQuickPickDate,
       storylines.StoryLineID,
-      storyarcs.LastQuickPickDate,
-      storyarcs.CreationDate, 
-      storyarcs.ModificationDate
+      storylines.StoryLineName
     FROM series 
       INNER JOIN issues 
       INNER JOIN pages 
@@ -46,7 +41,7 @@ $storylineid=isset($_GET["storylineid"]) ? $_GET["storylineid"] : "";
       ON pages.PageId = pageStoryArcs.PageId 
       ON issues.IssueID = pages.IssueID 
       ON series.SeriesID = issues.SeriesID 
-    WHERE storyArcs.StoryArcName<>''";
+    WHERE 1";
 
   if($pageid != "") {
     $query = $query." AND pagestoryarcs.PageID = ".$pageid; 
@@ -69,14 +64,9 @@ $storylineid=isset($_GET["storylineid"]) ? $_GET["storylineid"] : "";
   }
 
   $query = $query." GROUP BY
-	storyarcs.StoryArcID, 
-	storyarcs.StoryArcName, 
-	storyarcs.IsUnnamed, 
   storylines.StoryLineID,
-	storyarcs.LastQuickPickDate,
-	storyarcs.CreationDate, 
-	storyarcs.ModificationDate
-ORDER BY issues.IssueNumber, pages.PageNumber, storyarcs.StoryArcName, storylines.StoryLineName 
+  storylines.StoryLineName
+ORDER BY storylines.StoryLineName
 LIMIT 200";
 
 // echo $query;
@@ -85,15 +75,8 @@ LIMIT 200";
 
     $i = 0;
     while($row = mysqli_fetch_assoc($result)) {
-      // $pages[$i]['pageStoryArcId'] = $row['PageStoryArcID'];
-      // $pages[$i]['pageId'] = $row['PageID'];
-      $pages[$i]['storyArcId'] = $row['StoryArcID'];
       $pages[$i]['storyLineId'] = $row['StoryLineID'];
-      $pages[$i]['storyArcName'] = $row['StoryArcName'];
-      $pages[$i]['isUnnamed'] = $row['IsUnnamed'];
-      $pages[$i]['lastQuickPickDate'] = $row['LastQuickPickDate'];
-      $pages[$i]['creationDate'] = $row['CreationDate'];
-      $pages[$i]['modificationDate'] = $row['ModificationDate'];
+      $pages[$i]['storyLineName'] = $row['StoryLineName'];
       $i++;
     }
       

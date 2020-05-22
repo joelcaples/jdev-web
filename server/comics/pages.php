@@ -22,7 +22,12 @@ $id=isset($_GET["issueid"]) ? $_GET["issueid"] : "";
   );
 
   $pages = [];
-  $query = "SELECT PageID, IssueID, PageNumber, PageFileName, PageType, CreationDate, ModificationDate, FileID FROM pages WHERE IssueID=".$id; 
+  $query = "SELECT PageID, IssueID, PageNumber, 
+              PageFileName, PageType, CreationDate, 
+              ModificationDate, FileID 
+            FROM pages 
+            WHERE IssueID=".$id."
+            LIMIT 200; 
 
   if ($result = $mysqli->query($query)) {
 
