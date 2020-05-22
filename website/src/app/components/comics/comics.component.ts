@@ -219,23 +219,29 @@ export class ComicsComponent implements OnInit {
 
     let reload = (e===undefined);
 
-    let p3 = (e!==undefined && filter!==ComicsFilter.StoryLine && filter!==ComicsFilter.StoryArc) 
+    let p1 = (
+        e!==undefined && 
+        filter!==ComicsFilter.StoryLine)
       ? new Promise(() => this.loadStoryLines(reload))      
       : new Promise(()=>{return;});
 
-    let p4 = (e!==undefined && filter!==ComicsFilter.StoryArc) 
+    let p2 = (
+        e!==undefined && 
+        filter!==ComicsFilter.StoryArc) 
       ? new Promise(() => this.loadStoryArcs(reload))      
       : new Promise(()=>{return;});
 
-      let p2 = (e!==undefined && filter!==ComicsFilter.Issue && filter!==ComicsFilter.Page)
+      let p3 = (
+        e!==undefined && 
+        filter!==ComicsFilter.Issue)
       ? new Promise(() => this.loadIssues(reload))
       : new Promise(()=>{return;});
 
-      let p1 = (e!==undefined && filter!==ComicsFilter.Page)
-      ? new Promise(() => this.loadPages(reload))
-      : new Promise(()=>{return;});
+      // let p1 = (e!==undefined && filter!==ComicsFilter.Page)
+      // ? new Promise(() => this.loadPages(reload))
+      // : new Promise(()=>{return;});
 
-    let p5 = new Promise(() => this.search());
+    let p4 = new Promise(() => this.search());
 
     p1
     .then(()=>
@@ -244,10 +250,7 @@ export class ComicsComponent implements OnInit {
         p3
         .then(()=>
           p4
-          .then(()=>
-            p5
-            .catch(err=>console.log(err))
-          .catch(err=>console.log(err)))
+          .catch(err=>console.log(err))
         .catch(err=>console.log(err)))
       .catch(err=>console.log(err)))
     .catch(err=>console.log(err)))

@@ -36,7 +36,7 @@
     <div class="dtc pa1 b">Series: </div> 
     <div class="dtc pa1 b">
       <select [(ngModel)]="selectedSeries" style="width: 100%;" (ngModelChange)="selectedSeriesChanged($event)">
-        <option disabled value="undefined" >Select...</option>
+        <option value="undefined" >Select...</option>
         <option *ngFor="let series of seriesList" [ngValue]="series">{{series.getDisplayValue()}}</option>
       </select> 
     </div> 
@@ -45,20 +45,11 @@
     </div> 
   </div>
 
-  <!-- <div class="dt-row ph3 w-100">
-    <div class="dtc pa1 b">Page: </div> 
-    <div class="dtc pa1 b">
-      <select [(ngModel)]="selectedPage" (change)="selectedPageChanged()" style="width: 100%;">
-        <option *ngFor="let page of pages" [ngValue]="page">{{page.pageNumber}}</option>
-      </select> 
-    </div> 
-  </div> -->
-
   <div class="dt-row ph3 w-100">
     <div class="dtc pa1 b">Story Line: </div> 
     <div class="dtc pa1 b">
       <select [(ngModel)]="selectedStoryLine" (ngModelChange)="selectedStoryLineChanged($event)" style="width: 100%;">
-        <option value="undefined" >Select...</option>
+        <option value="undefined" >[All]</option>
         <option *ngFor="let storyLine of storyLines" [ngValue]="storyLine" >{{storyLine.getDisplayValue()}}</option>
       </select> 
     </div> 
@@ -71,7 +62,7 @@
     <div class="dtc pa1 b">Story Arc: </div> 
     <div class="dtc pa1 b">
       <select [(ngModel)]="selectedStoryArc" (ngModelChange)="selectedStoryArcChanged($event)" style="width: 100%;">
-        <option value="undefined" >Select...</option>
+        <option value="undefined" >[All]</option>
         <option *ngFor="let storyArc of storyArcs" [ngValue]="storyArc">{{storyArc.getDisplayValue()}}</option>
       </select> 
     </div> 
@@ -84,7 +75,7 @@
     <div class="dtc pa1 b">Issue: </div> 
     <div class="dtc pa1 b">
       <select [(ngModel)]="selectedIssue" style="width: 100%;" (ngModelChange)="selectedIssueChanged($event)" >
-        <option disabled value="undefined" >Select...</option>
+        <option value="undefined" >[All]</option>
         <option *ngFor="let issue of issues" [ngValue]="issue" >{{issue.getDisplayValue()}}</option>
       </select> 
     </div> 
@@ -97,14 +88,12 @@
 
   <ng-container *ngFor="let searchResultsRow of searchResults">
     <div class="dt-row ph3 w-100">
-      <div class="dtc pa1 b">{{searchResultsRow.seriesName}}</div> 
-      <div class="dtc pa1 b">{{searchResultsRow.storyLineName}}</div> 
-      <div class="dtc pa1 b">{{searchResultsRow.storyArcName}}</div> 
-      <div class="dtc pa1 b">{{searchResultsRow.issueNumber}}</div> 
-      <!-- <div class="dtc pa1 b">{{searchResultsRow.filePath}}</div>  -->
-      <div class="dtc pa1 b">{{searchResultsRow.PageNumber}}</div> 
-      <div class="dtc pa1 b">{{searchResultsRow.PageType}}</div> 
-      <!-- <div class="dtc pa1 b">{{searchResultsRow.pageFileName}}</div>  -->
+      <div class="dtc pa1 ba w-25">{{searchResultsRow.seriesName}}</div> 
+      <div class="dtc pa1 ba w-25">{{searchResultsRow.storyLineName}}</div> 
+      <div class="dtc pa1 ba w-25">{{searchResultsRow.storyArcName}}</div> 
+      <div class="dtc pa1 ba w-5">{{searchResultsRow.issueNumber}}</div> 
+      <div class="dtc pa1 ba w-5">{{searchResultsRow.PageNumber}}</div> 
+      <div class="dtc pa1 ba w-15">{{searchResultsRow.PageType}}</div> 
     </div>
   </ng-container>
 
