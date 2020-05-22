@@ -54,20 +54,26 @@ export class ComicsComponent implements OnInit {
     this.isLoading=false;
 
   }
-  public loadStoryLines(reload:boolean) {
+  public loadStoryLines(clearValues:boolean) {
     // if(this.isLoading)
     //   return;
+
+    if(clearValues) {
+      this.storyLines=[];
+      this.selectedStoryLine = undefined;
+      return;
+    }
 
     this.isLoading=true;
     // this.selectedStoryLine = undefined;
 
-      this.comicsService.getStoryLines(
-        this.selectedPage?.pageId, 
-        this.selectedSeries?.seriesId, 
-        this.selectedIssue?.issueId, 
-        -1,
-        this.selectedStoryArc?.storyArcId
-        )
+    this.comicsService.getStoryLines(
+      this.selectedPage?.pageId, 
+      this.selectedSeries?.seriesId, 
+      this.selectedIssue?.issueId, 
+      -1,
+      this.selectedStoryArc?.storyArcId
+      )
     .subscribe(results  => {
     
       this.storyLines = results.map(x => Object.assign(new StoryLine(), x));
@@ -79,8 +85,14 @@ export class ComicsComponent implements OnInit {
     this.isLoading=false;
   }
 
-  public loadStoryArcs(reload:boolean) {
+  public loadStoryArcs(clearValues:boolean) {
 
+
+    if(clearValues) {
+      this.storyArcs=[];
+      this.selectedStoryArc = undefined;
+      return;
+    }
 
     this.isLoading=true;
     // this.selectedStoryArc = undefined;
@@ -100,9 +112,15 @@ export class ComicsComponent implements OnInit {
     this.isLoading=false;
   }
 
-  public loadIssues(reload:boolean) {
+  public loadIssues(clearValues:boolean) {
     // if(this.isLoading)
     //   return;
+
+    if(clearValues) {
+      this.issues=[];
+      this.selectedIssue = undefined;
+      return;
+    }
 
     this.isLoading=true;
 
@@ -130,9 +148,15 @@ export class ComicsComponent implements OnInit {
     this.isLoading=false;
   }
 
-  public loadPages(reload:boolean) {
+  public loadPages(clearValues:boolean) {
     // if(this.isLoading)
     //   return;
+
+    if(clearValues) {
+      this.pages=[];
+      this.selectedPage = undefined;
+      return;
+    }
 
     this.isLoading=true;
     this.selectedPage = undefined;
@@ -166,75 +190,54 @@ export class ComicsComponent implements OnInit {
   }
 
   public selectedSeriesChanged(e) {
-
-    this.selectedSeries = e;
-
-    if(e===undefined)
-      this.reload(e, ComicsFilter.Series);
-    
-    this.applyFilters(e, ComicsFilter.Series);
+    this.selectedSeries = e;    
+    this.reload(e, ComicsFilter.Series);
   }
 
   public selectedIssueChanged(e) {
-
-    this.selectedIssue = e;
-
-    if(e===undefined)
-      this.reload(e, ComicsFilter.Issue);
-    
-    this.applyFilters(e, ComicsFilter.Issue);
+    this.selectedIssue = e;    
+    this.reload(e, ComicsFilter.Issue);
   }
 
   public selectedPageChanged(e) {
-
-    this.selectedPage = e;
-
-    if(e===undefined)
-      this.reload(e, ComicsFilter.Page);
-    
-    this.applyFilters(e, ComicsFilter.Page);
+    this.selectedPage = e;    
+    this.reload(e, ComicsFilter.Page);
   }
 
   public selectedStoryLineChanged(e) {
-
-    this.selectedStoryLine = e;
-
-    if(e===undefined)
-      this.reload(e, ComicsFilter.StoryLine);
-    
-    this.applyFilters(e, ComicsFilter.StoryLine);
+    this.selectedStoryLine = e;    
+    this.reload(e, ComicsFilter.StoryLine);
   }
 
   public selectedStoryArcChanged(e) {
-
     this.selectedStoryArc = e;
-
-    if(e===undefined)
-      this.reload(e, ComicsFilter.StoryArc);
-    
-    this.applyFilters(e, ComicsFilter.StoryArc);
+    this.reload(e, ComicsFilter.StoryArc);
   }
 
   private reload(e, filter:ComicsFilter) {
 
-    let reload = (e===undefined);
+    let clearValues = (e===undefined && filter===ComicsFilter.Series);
+
+    // if(e===undefined && filter===ComicsFilter.Series) {
+
+    // }
 
     let p1 = (
-        e!==undefined && 
+//        e!==undefined && 
         filter!==ComicsFilter.StoryLine)
-      ? new Promise(() => this.loadStoryLines(reload))      
+      ? new Promise(() => this.loadStoryLines(clearValues))
       : new Promise(()=>{return;});
 
     let p2 = (
-        e!==undefined && 
+//        e!==undefined && 
         filter!==ComicsFilter.StoryArc) 
-      ? new Promise(() => this.loadStoryArcs(reload))      
+      ? new Promise(() => this.loadStoryArcs(clearValues))
       : new Promise(()=>{return;});
 
       let p3 = (
-        e!==undefined && 
+ //       e!==undefined && 
         filter!==ComicsFilter.Issue)
-      ? new Promise(() => this.loadIssues(reload))
+      ? new Promise(() => this.loadIssues(clearValues))
       : new Promise(()=>{return;});
 
       // let p1 = (e!==undefined && filter!==ComicsFilter.Page)
@@ -255,9 +258,4 @@ export class ComicsComponent implements OnInit {
       .catch(err=>console.log(err)))
     .catch(err=>console.log(err)))
   }
-
-  private applyFilters(e, filter:ComicsFilter) {
-    this.reload(e, filter);
-  }  
-
 }
