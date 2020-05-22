@@ -22,15 +22,27 @@ export class ComicsService {
     .pipe(map(results=><Series[]>results));
   }  
 
-  public getIssues(seriesId:number):Observable<Issue[]> {
+  public getIssues(
+    seriesId:number,
+    issueId:number,
+    storyLineId:number,
+    storyArcId:number        
+  ):Observable<Issue[]> {
     return this.http
-    .get<Issue[]>(`http://localhost/server/comics/issues.php?id=${seriesId}`)
+    .get<Issue[]>(`http://localhost/server/comics/issues.php?seriesid=${(seriesId>-1?seriesId:"")}&issueid=${(issueId>-1?issueId:"")}&storyarcid=${(storyArcId>-1?storyArcId:"")}&storylineid=${(storyLineId>-1?storyLineId:"")}`)
     .pipe(map(results=><Issue[]>results));
   }  
 
   public getPages(issueId:number):Observable<Page[]> {
+
+    if(issueId===undefined)
+      return Observable.create(function () {
+        let pages:Page[] = [];
+        return pages;
+      });
+
     return this.http
-    .get<Page[]>(`http://localhost/server/comics/pages.php?issueid=${issueId}`)
+    .get<Page[]>(`http://localhost/server/comics/pages.php?issueid=${(issueId===undefined ? "" : issueId)}`)
     .pipe(map(results=><Page[]>results));
   }  
 
@@ -51,8 +63,8 @@ export class ComicsService {
     pageId:number,    
     seriesId:number,
     issueId:number,
-    storyArcId:number,
-    storyLineId:number    
+    storyLineId:number,    
+    storyArcId:number
   ):Observable<StoryArc[]> {
 
     return this.http

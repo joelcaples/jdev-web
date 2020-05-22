@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ComicsService } from 'src/app/services/comics.service';
 import { Series } from 'src/app/models/comics.series.model';
 import { Issue } from 'src/app/models/comics.issue.model';
-import { forkJoin } from 'rxjs';
 import { Page } from 'src/app/models/comics.page.model';
 import { StoryArc } from 'src/app/models/comics.storyArc.model';
 import { SearchResultsRow } from 'src/app/models/comics.search-results-row.model';
 import { StoryLine } from 'src/app/models/comics.story-line.model';
-import { promise } from 'protractor';
+import { ComicsFilter } from 'src/app/shared/enums/comics.enums';
 
 @Component({
   selector: 'app-comics',
@@ -35,18 +34,14 @@ export class ComicsComponent implements OnInit {
   ngOnInit(): void {
     this.label="Series";
     this.loadSeries();
-    // this.storyArcs.splice(0,0,this.defaultStoryArc());
-    // this.issues.splice(0,0,this.defaultIssue());
-    // this.pages.splice(0,0,this.defaultPage());
-    // this.storyLines.splice(0,0,this.defaultStoryLine());
-    // this.storyArcs.splice(0,0,this.defaultStoryArc());
   }
 
   public loadSeries() {
-    if(this.isLoading)
-      return;
+    // if(this.isLoading)
+    //   return;
 
     this.isLoading=true;
+    this.selectedSeries = undefined;
 
     this.comicsService
       .getComics()
@@ -54,134 +49,104 @@ export class ComicsComponent implements OnInit {
       
       this.seriesList = results.map(x => Object.assign(new Series(), x));
 
-      // let defaultSeries = new Series();
-      // defaultSeries.seriesId=-1;
-      // defaultSeries.displayValue="Select...";
-      // this.selectedSeries = defaultSeries;      
-      // this.seriesList.splice(0,0,defaultSeries);
-
     },(e=>console.log(e)));
 
     this.isLoading=false;
 
   }
-
-  public loadIssues() {
-    if(this.isLoading)
-      return;
-
-    this.isLoading=true;
-
-    console.log("loadIssues (2)");
-    console.log(this.selectedSeries?.seriesId);
-    if(this.selectedSeries?.seriesId !== undefined)
-    this.comicsService
-      .getIssues(this.selectedSeries.seriesId)
-      .subscribe(results => {
-      
-      this.issues = results.map(x => Object.assign(new Issue(), x));
-      // this.issues.splice(0,0,this.defaultIssue());
-
-    },(e=>console.log(e)));
-
-    this.isLoading=false;
-  }
-
-  // private defaultIssue() {
-  //   let defaultIssue = new Issue();
-  //   defaultIssue.issueId=-1;
-  //   defaultIssue.displayValue="Select...";
-  //   this.selectedIssue = defaultIssue;
-  //   return this.selectedIssue;
-  // }
-
-  public loadPages(issueId:number) {
-    if(this.isLoading)
-      return;
+  public loadStoryLines(reload:boolean) {
+    // if(this.isLoading)
+    //   return;
 
     this.isLoading=true;
-
-    this.comicsService
-      .getPages(issueId)
-      .subscribe(results => {
-
-      this.pages = results.map(x => Object.assign(new Page(), x));        
-      // this.pages.splice(0,0,this.defaultPage());
-
-    },(e=>console.log(e)));
-
-    this.isLoading=false;
-  }
-
-//   private defaultPage() {
-//     let defaultPage = new Page();
-//     defaultPage.issueId=-1;
-//     defaultPage.displayValue="Select...";
-//     this.selectedPage = defaultPage;
-//     return this.selectedPage;
-// }
-
-  public loadStoryLines() {
-    if(this.isLoading)
-      return;
-
-    this.isLoading=true;
+    // this.selectedStoryLine = undefined;
 
       this.comicsService.getStoryLines(
         this.selectedPage?.pageId, 
         this.selectedSeries?.seriesId, 
         this.selectedIssue?.issueId, 
-        -1, 
-        -1)
+        -1,
+        this.selectedStoryArc?.storyArcId
+        )
     .subscribe(results  => {
     
       this.storyLines = results.map(x => Object.assign(new StoryLine(), x));
-      // this.storyLines.splice(0,0,this.defaultStoryLine());
+      let selectedStoryLineId = this.selectedStoryLine?.storyLineId ?? -1; 
+      this.selectedStoryLine = this.storyLines.filter(function (storyLine) { return storyLine.storyLineId === selectedStoryLineId; })[0] || undefined;
 
     },(e=>console.log(e)));
 
     this.isLoading=false;
   }
-
-  // private defaultStoryLine() {
-  //   let defaultStoryLine = new StoryLine();
-  //   defaultStoryLine.storyLineId=-1;
-  //   defaultStoryLine.displayValue="Select...";
-  //   this.selectedStoryLine = defaultStoryLine;
-  //   return this.selectedStoryLine;
-  // }
 
   public loadStoryArcs(reload:boolean) {
 
-    console.log("===== loadStoryArcs =====")
-    console.log("isLoading:" + this.isLoading);
-    console.log("reload:" + reload);
-
-    if(this.isLoading)
-      return;
 
     this.isLoading=true;
+    // this.selectedStoryArc = undefined;
 
-      this.comicsService.getStoryArcs(
-        this.selectedPage?.pageId, 
-        this.selectedSeries?.seriesId, 
-        this.selectedIssue?.issueId, 
-        -1, 
-        -1)
+    this.comicsService
+    .getStoryArcs(
+      this.selectedPage?.pageId, 
+      this.selectedSeries?.seriesId, 
+      this.selectedIssue?.issueId, 
+      this.selectedStoryLine?.storyLineId, 
+      -1)
     .subscribe(results => {    
       this.storyArcs = results.map(x => Object.assign(new StoryArc(), x));
-      // this.storyArcs.splice(0,0,this.defaultStoryArc());
+      let selectedStoryArcId = this.selectedStoryArc?.storyArcId ?? -1; 
+      this.selectedStoryArc = this.storyArcs.filter(function (storyArc) { return storyArc.storyArcId === selectedStoryArcId; })[0] || undefined;
     },(e=>console.log(e)));
     this.isLoading=false;
   }
 
-  // private defaultStoryArc() {
-  //   let defaultStoryArc = new StoryArc();
-  //   defaultStoryArc.storyArcId=-1;
-  //   defaultStoryArc.displayValue="Select...";
-  //   this.selectedStoryArc = defaultStoryArc;
-  //   return this.selectedStoryArc;
-  // }
+  public loadIssues(reload:boolean) {
+    // if(this.isLoading)
+    //   return;
+
+    this.isLoading=true;
+
+    // console.log("loadIssues (2)");
+    // console.log(this.selectedSeries?.seriesId);
+
+    if(this.selectedSeries?.seriesId !== undefined)
+      
+      this.comicsService
+      .getIssues(
+        this.selectedSeries?.seriesId, 
+        -1,
+        this.selectedStoryLine?.storyLineId,
+        this.selectedStoryArc?.storyArcId
+      )
+      .subscribe(results => {
+      
+      this.issues = results.map(x => Object.assign(new Issue(), x));
+
+      let selectedIssueId = this.selectedIssue?.issueId ?? -1; 
+      this.selectedIssue = this.issues.filter(function (issue) { return issue.issueId === selectedIssueId; })[0] || undefined;
+
+    },(e=>console.log(e)));
+
+    this.isLoading=false;
+  }
+
+  public loadPages(reload:boolean) {
+    // if(this.isLoading)
+    //   return;
+
+    this.isLoading=true;
+    this.selectedPage = undefined;
+
+    this.comicsService
+      .getPages(this.selectedIssue?.issueId)
+      .subscribe(results => {
+
+      this.pages = results.map(x => Object.assign(new Page(), x));        
+
+    },(e=>console.log(e)));
+
+    this.isLoading=false;
+  }
 
   public search() {
 
@@ -200,38 +165,77 @@ export class ComicsComponent implements OnInit {
     },(e=>console.log(e)));
   }
 
-  // compareSeries(arg1, arg2) {
-  //   if (arg1.se && arg2) {
-  //     return arg1.seriesId == arg2.seriesId;
-  //   } else {
-  //     return false;
-  //   }
-  // }
-
   public selectedSeriesChanged(e) {
-    // console.log(e);
-    // console.log(e.target);
-    // console.log(e.target.value);
+
     this.selectedSeries = e;
-    let reload = (e === undefined);
-    // console.log("selctedSeriesChanged (1)");
-    // console.log(this.selectedSeries?.seriesId);
-    // if(this.selectedSeries.seriesId > 0) {
-      this.loadIssues();
-    // }
-    this.loadStoryArcs(reload);
-    this.loadStoryLines();
-    this.search();
+
+    if(e===undefined)
+      this.reload(e, ComicsFilter.Series);
+    
+    this.applyFilters(e, ComicsFilter.Series);
   }
 
   public selectedIssueChanged(e) {
-    // bug?  Should be just the obj?
+
     this.selectedIssue = e;
-    let reload = (e === undefined);
-    let p1 = new Promise(() => this.loadPages(this.selectedIssue.issueId));
-    let p2 = new Promise(() => this.loadStoryArcs(reload));
-    let p3 = new Promise(() => this.loadStoryLines());
-    let p4 = new Promise(() => this.search());
+
+    if(e===undefined)
+      this.reload(e, ComicsFilter.Issue);
+    
+    this.applyFilters(e, ComicsFilter.Issue);
+  }
+
+  public selectedPageChanged(e) {
+
+    this.selectedPage = e;
+
+    if(e===undefined)
+      this.reload(e, ComicsFilter.Page);
+    
+    this.applyFilters(e, ComicsFilter.Page);
+  }
+
+  public selectedStoryLineChanged(e) {
+
+    this.selectedStoryLine = e;
+
+    if(e===undefined)
+      this.reload(e, ComicsFilter.StoryLine);
+    
+    this.applyFilters(e, ComicsFilter.StoryLine);
+  }
+
+  public selectedStoryArcChanged(e) {
+
+    this.selectedStoryArc = e;
+
+    if(e===undefined)
+      this.reload(e, ComicsFilter.StoryArc);
+    
+    this.applyFilters(e, ComicsFilter.StoryArc);
+  }
+
+  private reload(e, filter:ComicsFilter) {
+
+    let reload = (e===undefined);
+
+    let p3 = (e!==undefined && filter!==ComicsFilter.StoryLine && filter!==ComicsFilter.StoryArc) 
+      ? new Promise(() => this.loadStoryLines(reload))      
+      : new Promise(()=>{return;});
+
+    let p4 = (e!==undefined && filter!==ComicsFilter.StoryArc) 
+      ? new Promise(() => this.loadStoryArcs(reload))      
+      : new Promise(()=>{return;});
+
+      let p2 = (e!==undefined && filter!==ComicsFilter.Issue && filter!==ComicsFilter.Page)
+      ? new Promise(() => this.loadIssues(reload))
+      : new Promise(()=>{return;});
+
+      let p1 = (e!==undefined && filter!==ComicsFilter.Page)
+      ? new Promise(() => this.loadPages(reload))
+      : new Promise(()=>{return;});
+
+    let p5 = new Promise(() => this.search());
 
     p1
     .then(()=>
@@ -240,51 +244,17 @@ export class ComicsComponent implements OnInit {
         p3
         .then(()=>
           p4
-          .catch(err=>console.log(err))
+          .then(()=>
+            p5
+            .catch(err=>console.log(err))
+          .catch(err=>console.log(err)))
         .catch(err=>console.log(err)))
       .catch(err=>console.log(err)))
     .catch(err=>console.log(err)))
-    }
-
-  public selectedPageChanged(e) {
-    this.selectedPage = e;
-    this.search();
   }
 
-  public selectedStoryLineChanged(e) {
-
-    this.selectedStoryLine = e;
-    let reload = (e === undefined);
-
-    let p1 = new Promise(() => this.loadPages(this.selectedIssue?.issueId));
-    let p2 = new Promise(() => this.loadStoryArcs(reload));
-    let p4 = new Promise(() => this.search());
-
-    p1
-    .then(()=>
-      p2
-      .then(()=>
-        p4
-        .catch(err=>console.log(err))
-      .catch(err=>console.log(err)))
-    .catch(err=>console.log(err)))
-  }
-
-  public selectedStoryArcChanged(e) {
-    this.selectedStoryArc = e;
-    let p1 = new Promise(() => this.loadPages(this.selectedIssue.issueId));
-    let p3 = new Promise(() => this.loadStoryLines());
-    let p4 = new Promise(() => this.search());
-
-    p1
-    .then(()=>
-      p3
-      .then(()=>
-        p4
-        .catch(err=>console.log(err))
-      .catch(err=>console.log(err)))
-    .catch(err=>console.log(err)))
-  
-  }
+  private applyFilters(e, filter:ComicsFilter) {
+    this.reload(e, filter);
+  }  
 
 }

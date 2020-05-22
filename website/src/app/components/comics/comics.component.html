@@ -44,18 +44,6 @@
       <p>{{selectedSeries?.seriesName}}</p>
     </div> 
   </div>
-  <div class="dt-row ph3 w-100">
-    <div class="dtc pa1 b">Issue: </div> 
-    <div class="dtc pa1 b">
-      <select [(ngModel)]="selectedIssue" style="width: 100%;" (ngModelChange)="selectedIssueChanged($event)" >
-        <option disabled value="undefined" >Select...</option>
-        <option *ngFor="let issue of issues" [ngValue]="issue" >{{issue.getDisplayValue()}}</option>
-      </select> 
-    </div> 
-    <div class="dtc pa1 b">
-      <p>{{selectedIssue?.issueNumber}}</p>
-    </div> 
-  </div>
 
   <!-- <div class="dt-row ph3 w-100">
     <div class="dtc pa1 b">Page: </div> 
@@ -89,6 +77,19 @@
     </div> 
     <div class="dtc pa1 b">
       <p>{{selectedStoryArc?.storyArcName}}</p>
+    </div> 
+  </div>
+
+  <div class="dt-row ph3 w-100">
+    <div class="dtc pa1 b">Issue: </div> 
+    <div class="dtc pa1 b">
+      <select [(ngModel)]="selectedIssue" style="width: 100%;" (ngModelChange)="selectedIssueChanged($event)" >
+        <option disabled value="undefined" >Select...</option>
+        <option *ngFor="let issue of issues" [ngValue]="issue" >{{issue.getDisplayValue()}}</option>
+      </select> 
+    </div> 
+    <div class="dtc pa1 b">
+      <p>{{selectedIssue?.issueNumber}}</p>
     </div> 
   </div>
 

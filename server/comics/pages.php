@@ -26,8 +26,7 @@ $id=isset($_GET["issueid"]) ? $_GET["issueid"] : "";
               PageFileName, PageType, CreationDate, 
               ModificationDate, FileID 
             FROM pages 
-            WHERE IssueID=".$id."
-            LIMIT 200; 
+            WHERE IssueID=".$id." LIMIT 200"; 
 
   if ($result = $mysqli->query($query)) {
 
