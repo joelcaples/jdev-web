@@ -16,7 +16,9 @@ import { AgGridModule } from 'ag-grid-angular';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 import {MenubarModule} from 'primeng/menubar';
-
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ComicSearchComponent } from './components/comics/comic-search/comic-search.component';
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import {MenubarModule} from 'primeng/menubar';
     ResourcesComponent,
     WidgetDashboardComponent,
     ComicsComponent,
-    NavBarComponent
+    NavBarComponent,
+    ComicSearchComponent
   ],
   imports: [
     FormsModule,
@@ -37,7 +40,9 @@ import {MenubarModule} from 'primeng/menubar';
     HttpClientModule,
     NgbModule,
     AgGridModule.withComponents([]),
-    MenubarModule
+    MenubarModule,
+    AutoCompleteModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

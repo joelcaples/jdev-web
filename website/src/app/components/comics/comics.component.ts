@@ -6,6 +6,7 @@ import { StoryArc } from 'src/app/models/comics.storyArc.model';
 import { SearchResultsRow } from 'src/app/models/comics.search-results-row.model';
 import { StoryLine } from 'src/app/models/comics.story-line.model';
 import { ComicsFilter } from 'src/app/shared/enums/comics.enums';
+import {AutoCompleteModule} from 'primeng/autocomplete';
 
 @Component({
   selector: 'app-comics',
@@ -15,6 +16,9 @@ import { ComicsFilter } from 'src/app/shared/enums/comics.enums';
 export class ComicsComponent implements OnInit {
 
   private isLoading:boolean=false;
+
+  private storyLineNameSearchCriteria:string;
+  public storyLineSearch:StoryLine;
 
   public seriesList:Series[];
   public selectedSeries:Series;
@@ -95,7 +99,8 @@ export class ComicsComponent implements OnInit {
       this.selectedSeries?.seriesId, 
       this.selectedIssue?.issueId, 
       -1,
-      this.selectedStoryArc?.storyArcId
+      this.selectedStoryArc?.storyArcId,
+      this.storyLineNameSearchCriteria
       )
     .subscribe(results  => {
     
@@ -269,4 +274,69 @@ export class ComicsComponent implements OnInit {
       .catch(err=>console.log(err)))
     .catch(err=>console.log(err)))
   }
+
+
+
+
+  // country: any;
+
+  // countries: any[];
+
+  filteredStoryLineSingle: any[];
+
+  // filteredCountriesMultiple: any[];
+
+  // brands: string[] = ['Audi','BMW','Fiat','Ford','Honda','Jaguar','Mercedes','Renault','Volvo','VW'];
+
+  // filteredBrands: any[];
+
+  // brand: string;
+
+  // // constructor(private countryService: CountryService) { }
+
+  filterStoryLineSingle(event) {
+      let query = event.query;
+
+        this.comicsService.getStoryLinesPromise(
+          -1, 
+          this.selectedSeries?.seriesId, 
+          this.selectedIssue?.issueId, 
+          -1,
+          this.selectedStoryArc?.storyArcId,
+          this.storyLineNameSearchCriteria
+          )    
+          .then(storyLines => {
+          this.filteredStoryLineSingle = this.filterStoryLine(query, storyLines);
+      });
+  }
+
+  // filterCountryMultiple(event) {
+  //     let query = event.query;
+  //     this.countryService.getCountries().then(countries => {
+  //         this.filteredCountriesMultiple = this.filterCountry(query, countries);
+  //     });
+  // }
+
+  filterStoryLine(query, storyLines: any[]):any[] {
+      //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+      let filtered : any[] = [];
+      for(let i = 0; i < storyLines.length; i++) {
+          let storyLine = storyLines[i];
+          if (storyLine.storyLineName.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+              filtered.push(storyLine);
+          }
+      }
+      return filtered;
+  }
+
+  // filterBrands(event) {
+  //     this.filteredBrands = [];
+  //     for(let i = 0; i < this.brands.length; i++) {
+  //         let brand = this.brands[i];
+  //         if (brand.toLowerCase().indexOf(event.query.toLowerCase()) == 0) {
+  //             this.filteredBrands.push(brand);
+  //         }
+  //     }
+  // }
+
 }

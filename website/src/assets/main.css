@@ -63,6 +63,13 @@ body {
   }
   */
 
+  body .ui-widget {
+    font-family: "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 12px;
+    text-decoration: none;
+  }
+  
+  
   .scroller {
     width: 300px;
     height: 100px;

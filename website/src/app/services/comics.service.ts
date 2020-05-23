@@ -51,12 +51,29 @@ export class ComicsService {
     seriesId:number,
     issueId:number,
     storyLineId:number,
-    storyArcId:number    
+    storyArcId:number,
+    storyLineNameSearchCriteria:string
   ):Observable<StoryLine[]> {
 
     return this.http
-      .get<StoryLine[]>(`http://localhost/server/comics/storylines.php?pageid=${pageId>-1?pageId:""}&seriesid=${(seriesId>-1?seriesId:"")}&issueid=${(issueId>-1?issueId:"")}&storyarcid=${(storyArcId>-1?storyArcId:"")}&storylineid=${(storyLineId>-1?storyLineId:"")}`)
+      .get<StoryLine[]>(`http://localhost/server/comics/storylines.php?pageid=${pageId>-1?pageId:""}&seriesid=${(seriesId>-1?seriesId:"")}&issueid=${(issueId>-1?issueId:"")}&storyarcid=${(storyArcId>-1?storyArcId:"")}&storylineid=${(storyLineId>-1?storyLineId:"")}&name=${(storyLineNameSearchCriteria)}`)
       .pipe(map(results=><StoryLine[]>results));
+  }  
+
+  public getStoryLinesPromise(
+    pageId:number,    
+    seriesId:number,
+    issueId:number,
+    storyLineId:number,
+    storyArcId:number,
+    storyLineNameSearchCriteria:string
+  ) {
+
+    return this.http
+      .get(`http://localhost/server/comics/storylines.php?pageid=${pageId>-1?pageId:""}&seriesid=${(seriesId>-1?seriesId:"")}&issueid=${(issueId>-1?issueId:"")}&storyarcid=${(storyArcId>-1?storyArcId:"")}&storylineid=${(storyLineId>-1?storyLineId:"")}&name=${(storyLineNameSearchCriteria === undefined?"":storyLineNameSearchCriteria)}`)
+      .toPromise()
+      .then(res => <any[]> res)
+      .then(data => { return data; });
   }  
 
   public getStoryArcs(
@@ -76,7 +93,8 @@ export class ComicsService {
     seriesId:number, 
     issueId:number, 
     storyArcId:number, 
-    storyLineId:number):Observable<SearchResultsRow[]> {
+    storyLineId:number
+  ):Observable<SearchResultsRow[]> {
     
     return this.http
     .get<SearchResultsRow[]>(`http://localhost/server/comics/search.php?seriesid=${(seriesId>-1?seriesId:"")}&issueid=${(issueId>-1?issueId:"")}&storyarcid=${(storyArcId>-1?storyArcId:"")}&storylineid=${(storyLineId>-1?storyLineId:"")}`)

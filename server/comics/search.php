@@ -69,6 +69,8 @@ $storylineid=isset($_GET["storylineid"]) ? $_GET["storylineid"] : "";
     pages.PageNumber
     LIMIT 500";
 
+//echo $query;
+
   if ($result = $mysqli->query($query)) {
 
     $i = 0;

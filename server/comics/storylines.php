@@ -14,6 +14,7 @@ $seriesid=isset($_GET["seriesid"]) ? $_GET["seriesid"] : "";
 $issueid=isset($_GET["issueid"]) ? $_GET["issueid"] : "";
 $storyarcid=isset($_GET["storyarcid"]) ? $_GET["storyarcid"] : "";
 $storylineid=isset($_GET["storylineid"]) ? $_GET["storylineid"] : "";
+$storyLineNameSearchCriteria=isset($_GET["name"]) ? $_GET["name"] : "";
 
 //function get(){  
 
@@ -63,11 +64,16 @@ $storylineid=isset($_GET["storylineid"]) ? $_GET["storylineid"] : "";
     $query = $query." AND storyLines.StoryLineID = ".$storylineid; 
   }
 
-  $query = $query." GROUP BY
-  storylines.StoryLineID,
-  storylines.StoryLineName
-ORDER BY storylines.StoryLineName
-LIMIT 200";
+  if($storyLineNameSearchCriteria != "") {
+    $query = $query." AND storyLines.StoryLineName LIKE %".$storylineid."%"; 
+  }
+  
+  $query = $query." 
+  GROUP BY
+    storylines.StoryLineID,
+    storylines.StoryLineName
+  ORDER BY storylines.StoryLineName
+  LIMIT 200";
 
 // echo $query;
 

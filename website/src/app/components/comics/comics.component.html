@@ -1,3 +1,24 @@
+<div class="w-80 dt-table">
+  <div class="dt-row">
+    <div class="dtc pr2">
+      <h3>Search:</h3>
+    </div>
+    <div class="dtc">
+      <div class="dt-row ph3 w-100">
+        <div class="dtc w-100">
+          <p-autoComplete
+            [(ngModel)]="storyLineSearch"
+            [suggestions]="filteredStoryLineSingle" 
+            (completeMethod)="filterStoryLineSingle($event)" 
+            field="storyLineName" [size]="30"
+            placeholder="Storyline" [minLength]="2">
+          </p-autoComplete>
+          <!-- (ngModelChange)="selectedStoryLineChanged($event)"  -->
+        </div>
+      </div>          
+    </div>
+  </div>
+</div>
 <div class="fl w-80">
   <div id="myGrid" class="ag-theme-alpine">
     <ag-grid-angular w-100
@@ -25,12 +46,13 @@
 
   <div class="ph3 fr w-20">
     <div class="dt-table">
+
       <div class="dt-row ph3 w-100">
         <label for="name" class="f6 b db mb2">Series</label>
       </div>
       <div class="dt-row ph3 w-100">
         <div class="dtc pb3">
-          <select [(ngModel)]="selectedSeries" class="form-control form-control-sm" style="width: 100%;" (ngModelChange)="selectedSeriesChanged($event)" [disabled]="!(seriesList?.length>0)">
+          <select [(ngModel)]="selectedSeries" class="form-control form-control-sm" style="width: 100%;" class="ui-widget" (ngModelChange)="selectedSeriesChanged($event)" [disabled]="!(seriesList?.length>0)">
             <option value="undefined" >Select...</option>
             <option *ngFor="let series of seriesList" [ngValue]="series">{{series.getDisplayValue()}}</option>
           </select> 
@@ -45,22 +67,26 @@
     </div>
     <div class="dt-row ph3 w-100">
       <div class="dtc pb3">
-        <select [(ngModel)]="selectedStoryLine" class="form-control form-control-sm" (ngModelChange)="selectedStoryLineChanged($event)" style="width: 100%;" [disabled]="!(storyLines?.length>0)">
+        <select [(ngModel)]="selectedStoryLine" class="form-control form-control-sm" (ngModelChange)="selectedStoryLineChanged($event)" class="ui-widget" style="width: 100%;" [disabled]="!(storyLines?.length>0)">
           <option value="undefined" >[All]</option>
           <option *ngFor="let storyLine of storyLines" [ngValue]="storyLine" >{{storyLine.getDisplayValue()}}</option>
         </select> 
       </div> 
-      <!-- <div class="dtc pa1 b">
-        <p>{{selectedStoryLine?.storyLineName}}</p>
-      </div>  -->
     </div>
-    
+
+
+    <!-- <div class="dt-row ph3 w-100">
+      <div class="dtc w-100">
+        <span style="margin-left:10px">Story Line: {{storyLineTemp ? storyLineTemp.storyLineName||storyLineTemp : 'none'}}</span>
+      </div>
+    </div> -->
+  
     <div class="dt-row ph3 w-100">
       <label for="name" class="f6 b db mb2">Story Arc</label>
     </div>
     <div class="dt-row ph3 w-100">
       <div class="dtc pb3">
-        <select [(ngModel)]="selectedStoryArc" class="form-control form-control-sm" (ngModelChange)="selectedStoryArcChanged($event)" style="width: 100%;" [disabled]="!(storyArcs?.length>0)">
+        <select [(ngModel)]="selectedStoryArc" class="form-control form-control-sm" (ngModelChange)="selectedStoryArcChanged($event)" class="ui-widget" style="width: 100%;" [disabled]="!(storyArcs?.length>0)">
         <option value="undefined" >[All]</option>
         <option *ngFor="let storyArc of storyArcs" [ngValue]="storyArc">{{storyArc.getDisplayValue()}}</option>
       </select> 
@@ -75,7 +101,7 @@
     </div>
     <div class="dt-row ph3 w-100">
       <div class="dtc pb3">
-        <select [(ngModel)]="selectedIssue" class="form-control form-control-sm" style="width: 100%;" (ngModelChange)="selectedIssueChanged($event)" [disabled]="!(issues?.length>0)">
+        <select [(ngModel)]="selectedIssue" class="form-control form-control-sm" class="ui-widget" style="width: 100%;" (ngModelChange)="selectedIssueChanged($event)" [disabled]="!(issues?.length>0)">
         <option value="undefined" >[All]</option>
         <option *ngFor="let issue of issues" [ngValue]="issue" >
           <!-- Multiplying float gets rid of trailing zeroes-->
