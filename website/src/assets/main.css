@@ -10,15 +10,16 @@
 } */
 
 body {
-  font-size: .9rem;
+  /* font-size: .9rem; */
+  font-family:  -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; -webkit-font-smoothing: antialiased;;
 }
 
-.div-table {
+/* .div-table {
     display: table;         
     width: auto;         
     background-color: #eee;         
     border: 1px solid #666666;         
-    border-spacing: 0px; /* cellspacing:poor IE support for  this */
+    border-spacing: 0px;
   }
 
   .div-table-row {
@@ -28,16 +29,16 @@ body {
   }
 
   .div-table-col {
-    float: left; /* fix for  buggy browsers */
+    float: left;
     display: table-column;         
     width: 200px;         
     background-color: #ccc;  
     border: 1px solid #666666;         
     padding: .01em;
-  }
+  } */
 
   /* Nav Bar */
-  ul {
+  /* ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -67,4 +68,10 @@ body {
     overflow-y: scroll;
     scrollbar-color: rebeccapurple green;
     scrollbar-width: thin;
-  } 
+  }  */
+
+
+
+.j-link:link, .link:visited { color:greenyellow; }
+.j-link:hover { color:royalblue; }
+.j-link:active { color:red; }
