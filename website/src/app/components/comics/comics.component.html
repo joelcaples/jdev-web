@@ -1,3 +1,4 @@
+
 <!-- <div class="kt-portlet">
   <div class="kt-portlet__head">
     <div class="kt-portlet__head-label">
@@ -40,9 +41,9 @@
         <option *ngFor="let series of seriesList" [ngValue]="series">{{series.getDisplayValue()}}</option>
       </select> 
     </div> 
-    <div class="dtc pa1 b">
+    <!-- <div class="dtc pa1 b">
       <p>{{selectedSeries?.seriesName}}</p>
-    </div> 
+    </div>  -->
   </div>
 
   <div class="dt-row ph3 w-100">
@@ -53,9 +54,9 @@
         <option *ngFor="let storyLine of storyLines" [ngValue]="storyLine" >{{storyLine.getDisplayValue()}}</option>
       </select> 
     </div> 
-    <div class="dtc pa1 b">
+    <!-- <div class="dtc pa1 b">
       <p>{{selectedStoryLine?.storyLineName}}</p>
-    </div> 
+    </div>  -->
   </div>
 
   <div class="dt-row ph3 w-100">
@@ -66,9 +67,9 @@
         <option *ngFor="let storyArc of storyArcs" [ngValue]="storyArc">{{storyArc.getDisplayValue()}}</option>
       </select> 
     </div> 
-    <div class="dtc pa1 b">
+    <!-- <div class="dtc pa1 b">
       <p>{{selectedStoryArc?.storyArcName}}</p>
-    </div> 
+    </div>  -->
   </div>
 
   <div class="dt-row ph3 w-100">
@@ -76,17 +77,37 @@
     <div class="dtc pa1 b">
       <select [(ngModel)]="selectedIssue" style="width: 100%;" (ngModelChange)="selectedIssueChanged($event)" [disabled]="!(issues?.length>0)">
         <option value="undefined" >[All]</option>
-        <option *ngFor="let issue of issues" [ngValue]="issue" >{{issue.getDisplayValue()}}</option>
+        <option *ngFor="let issue of issues" [ngValue]="issue" >
+          <!-- Multiplying float gets rid of trailing zeroes-->
+          {{issue.issueNumber * 1}}
+        </option>
       </select> 
     </div> 
-    <div class="dtc pa1 b">
+    <!-- <div class="dtc pa1 b">
       <p>{{selectedIssue?.issueNumber}}</p>
-    </div> 
+    </div>  -->
   </div>
 
 <hr>
 
-  <ng-container *ngFor="let searchResultsRow of searchResults">
+<div class="dt-row ph3 w-100">
+  <div class="dtc pa1 w-100">
+
+
+
+  </div> 
+</div>
+
+
+<!-- <div class="dt-row ph3 w-100">
+  <div class="dtc pa1 b ba w-25">Series</div> 
+  <div class="dtc pa1 b ba w-25">Storyline</div> 
+  <div class="dtc pa1 b ba w-25">Story Arc</div> 
+  <div class="dtc pa1 b ba w-5">Issue Number</div> 
+  <div class="dtc pa1 b ba w-5">Page Number</div> 
+  <div class="dtc pa1 b ba w-15">Page Type</div> 
+</div>
+<ng-container *ngFor="let searchResultsRow of searchResults">
     <div class="dt-row ph3 w-100">
       <div class="dtc pa1 ba w-25">{{searchResultsRow.seriesName}}</div> 
       <div class="dtc pa1 ba w-25">{{searchResultsRow.storyLineName}}</div> 
@@ -96,5 +117,13 @@
       <div class="dtc pa1 ba w-15">{{searchResultsRow.PageType}}</div> 
     </div>
   </ng-container>
+</div> -->
 
+<div id="myGrid" class="ag-theme-alpine-dark">
+  <ag-grid-angular w-100
+    style="height: 500px;"
+    class="ag-theme-alpine-dark"
+    [rowData]="searchResults"
+    [columnDefs]="columnDefs">  
+  </ag-grid-angular>
 </div>

@@ -82,4 +82,15 @@ export class ComicsService {
     .get<SearchResultsRow[]>(`http://localhost/server/comics/search.php?seriesid=${(seriesId>-1?seriesId:"")}&issueid=${(issueId>-1?issueId:"")}&storyarcid=${(storyArcId>-1?storyArcId:"")}&storylineid=${(storyLineId>-1?storyLineId:"")}`)
     .pipe(map(results=><SearchResultsRow[]>results));
   }  
+
+  // public searchRaw(
+  //   seriesId:number, 
+  //   issueId:number, 
+  //   storyArcId:number, 
+  //   storyLineId:number) {
+    
+  //   return this.http
+  //   .get(`http://localhost/server/comics/search.php?seriesid=${(seriesId>-1?seriesId:"")}&issueid=${(issueId>-1?issueId:"")}&storyarcid=${(storyArcId>-1?storyArcId:"")}&storylineid=${(storyLineId>-1?storyLineId:"")}`)
+  // }  
+
 }

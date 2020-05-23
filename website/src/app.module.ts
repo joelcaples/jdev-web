@@ -12,6 +12,7 @@ import { ResourcesComponent } from './app/components/resources/resources.compone
 import { WidgetDashboardComponent } from './app/widgets/widget-dashboard/widget-dashboard.component';
 import { ComicsComponent } from './app/components/comics/comics.component';
 import { FormsModule } from '@angular/forms';
+import { AgGridModule } from 'ag-grid-angular';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    AgGridModule.withComponents([])
   ],
   providers: [],
   bootstrap: [AppComponent]

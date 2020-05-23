@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ComicsService } from 'src/app/services/comics.service';
 import { Series } from 'src/app/models/comics.series.model';
 import { Issue } from 'src/app/models/comics.issue.model';
-import { Page } from 'src/app/models/comics.page.model';
 import { StoryArc } from 'src/app/models/comics.storyArc.model';
 import { SearchResultsRow } from 'src/app/models/comics.search-results-row.model';
 import { StoryLine } from 'src/app/models/comics.story-line.model';
@@ -15,48 +14,59 @@ import { ComicsFilter } from 'src/app/shared/enums/comics.enums';
 })
 export class ComicsComponent implements OnInit {
 
+  private isLoading:boolean=false;
+
   public seriesList:Series[];
   public selectedSeries:Series;
+
   public issues:Issue[];
   public selectedIssue:Issue;
-  public label:string;
-  public pages:Page[];
-  public selectedPage:Page;
+
   public storyArcs:StoryArc[];
   public selectedStoryArc:StoryArc;
-  public searchResults:SearchResultsRow[];
-  public selectedSearchResultsRow:SearchResultsRow;
+
   public storyLines:StoryLine[];
   public selectedStoryLine:StoryLine;
-  private isLoading:boolean=false;
+
+  public searchResults:SearchResultsRow[];
+  public selectedSearchResultsRow:SearchResultsRow;
+
+  public columnDefs = [
+    {headerName: 'Series', field: 'seriesName' },
+    {headerName: 'Story Line', field: 'storyLineName' },
+    {headerName: 'Story Arc', field: 'storyArcName'},
+    {headerName: 'Issue', field: 'issueNumber'},
+    {headerName: 'Page', field: 'pageNumber'},
+    {headerName: 'Page Type', field: 'pageType'}
+  ];
+
+  public rowData = [
+    { make: 'Toyota', model: 'Celica', price: 35000 },
+    { make: 'Ford', model: 'Mondeo', price: 32000 },
+    { make: 'Porsche', model: 'Boxter', price: 72000 }
+  ];
+  
   constructor(private comicsService:ComicsService) { }
 
   ngOnInit(): void {
-    this.label="Series";
     this.loadSeries();
   }
 
   public loadSeries() {
-    // if(this.isLoading)
-    //   return;
 
     this.isLoading=true;
     this.selectedSeries = undefined;
 
     this.comicsService
       .getComics()
-      .subscribe(results => {
-      
+      .subscribe(results => {      
       this.seriesList = results.map(x => Object.assign(new Series(), x));
-
     },(e=>console.log(e)));
 
     this.isLoading=false;
-
   }
+
   public loadStoryLines(clearValues:boolean) {
-    // if(this.isLoading)
-    //   return;
 
     if(clearValues) {
       this.storyLines=[];
@@ -68,7 +78,7 @@ export class ComicsComponent implements OnInit {
     // this.selectedStoryLine = undefined;
 
     this.comicsService.getStoryLines(
-      this.selectedPage?.pageId, 
+      -1, 
       this.selectedSeries?.seriesId, 
       this.selectedIssue?.issueId, 
       -1,
@@ -99,7 +109,7 @@ export class ComicsComponent implements OnInit {
 
     this.comicsService
     .getStoryArcs(
-      this.selectedPage?.pageId, 
+      -1, 
       this.selectedSeries?.seriesId, 
       this.selectedIssue?.issueId, 
       this.selectedStoryLine?.storyLineId, 
@@ -148,30 +158,6 @@ export class ComicsComponent implements OnInit {
     this.isLoading=false;
   }
 
-  public loadPages(clearValues:boolean) {
-    // if(this.isLoading)
-    //   return;
-
-    if(clearValues) {
-      this.pages=[];
-      this.selectedPage = undefined;
-      return;
-    }
-
-    this.isLoading=true;
-    this.selectedPage = undefined;
-
-    this.comicsService
-      .getPages(this.selectedIssue?.issueId)
-      .subscribe(results => {
-
-      this.pages = results.map(x => Object.assign(new Page(), x));        
-
-    },(e=>console.log(e)));
-
-    this.isLoading=false;
-  }
-
   public search() {
 
     this.comicsService
@@ -185,8 +171,21 @@ export class ComicsComponent implements OnInit {
     
         this.searchResults = results.map(x => Object.assign(new SearchResultsRow(), x));
         this.searchResults = this.searchResults.concat(results.slice(0,50));
-
     },(e=>console.log(e)));
+
+    // this.comicsService
+    //   .searchRaw(
+    //     this.selectedSeries === undefined ? -1 : this.selectedSeries.seriesId, 
+    //     this.selectedIssue === undefined ? -1 : this.selectedIssue.issueId, 
+    //     this.selectedStoryArc === undefined ? -1 : this.selectedStoryArc.storyArcId, 
+    //     this.selectedStoryLine === undefined ? -1 : this.selectedStoryLine.storyLineId 
+    //     )
+    //   .subscribe(results  => {
+    
+    //     // this.searchResults = results.map(x => Object.assign(new SearchResultsRow(), x));
+    //     // this.searchResults = this.searchResults.concat(results.slice(0,50));
+    //     this.rowData = results;
+    // },(e=>console.log(e)));
   }
 
   public selectedSeriesChanged(e) {
@@ -197,11 +196,6 @@ export class ComicsComponent implements OnInit {
   public selectedIssueChanged(e) {
     this.selectedIssue = e;    
     this.reload(e, ComicsFilter.Issue);
-  }
-
-  public selectedPageChanged(e) {
-    this.selectedPage = e;    
-    this.reload(e, ComicsFilter.Page);
   }
 
   public selectedStoryLineChanged(e) {
