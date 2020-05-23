@@ -39,6 +39,7 @@ export class NavBarComponent implements OnInit {
               // command:(event) => {mainMenuItem=MainMenuItemType.Widgets}, 
             //   routerLink:"/widgetdashboard"
           },
+          {separator:true},
           {
               label: 'Resources',
               icon: 'pi pi-fw pi-pencil',
@@ -48,6 +49,7 @@ export class NavBarComponent implements OnInit {
               ],
               routerLink:"/resources"
           },
+          {separator:true},
           {
               label: 'Tech',
               icon: 'pi pi-fw pi-pencil',
@@ -55,6 +57,7 @@ export class NavBarComponent implements OnInit {
               ],
               routerLink:"/tech"
           },
+          {separator:true},
           {
               label: 'Comics',
               icon: 'pi pi-fw pi-pencil',
