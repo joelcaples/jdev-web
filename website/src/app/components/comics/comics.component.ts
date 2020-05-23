@@ -173,6 +173,8 @@ export class ComicsComponent implements OnInit {
 
   public search() {
 
+    this.gridApi.overlay = this.gridApi.overlayLoadingTemplate;
+
     this.comicsService
       .search(
         this.selectedSeries === undefined ? -1 : this.selectedSeries.seriesId, 
@@ -185,6 +187,8 @@ export class ComicsComponent implements OnInit {
         this.searchResults = results.map(x => Object.assign(new SearchResultsRow(), x));
         this.searchResults = this.searchResults.concat(results.slice(0,50));
     },(e=>console.log(e)));
+
+    this.gridApi.hideOverlay();
 
     // this.comicsService
     //   .searchRaw(
