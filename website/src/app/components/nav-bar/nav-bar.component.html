@@ -1,12 +1,26 @@
-<div class="w-100">
-  <button ly-button [lyMenuTriggerFor]="menu" [openOnHover]="true">Widgets</button>
-  <ng-template #menu let-T>
-    <ly-menu [ref]="T" [hasBackdrop]="false">
-      <button ly-button ly-menu-item><span><a class="link dim gray" routerLink="/requestqueue">Request Queue</a></span></button>
-      <button ly-button ly-menu-item><span><a class="link dim gray f6 f5-ns dib mr3" routerLink="/webscraper">Web Scraper</a></span></button>
-    </ly-menu>
-  </ng-template>
-  <button ly-button><span><a class="link j-link mr3" href="#" (click)="mainMenuItem=MainMenuItemType.Resources" routerLink="/resources" routerLinkActive="active">Resources</a></span></button>
-  <button ly-button><span><a class="link j-link mr3" href="#" (click)="mainMenuItem=MainMenuItemType.Tech" routerLink="/tech" routerLinkActive="active">Tech</a></span></button>
-  <button ly-button><span><a class="link j-link mr3" href="#" (click)="mainMenuItem=MainMenuItemType.Comics" routerLink="/comics" routerLinkActive="active">Comics</a></span></button>
-</div>
+<nav class="border-box db dt-l w-100 pa3">
+  <a class="f3 db dtc-l v-mid silver link dim w-100 w-20-l tc mb2 mb0-l" href="#" title="Home">
+    <!-- <img src="http://tachyons.io/img/logo.jpg" class="dib w2 h2 br-100" alt="Site Name"> -->
+    Angry Lemonade Productions
+  </a>
+  <div class="w-60">
+    <div class="w-100">
+      <button ly-button [lyMenuTriggerFor]="menu" [openOnHover]="true">Widgets</button>
+      <ng-template #menu let-T>
+        <ly-menu [ref]="T" [hasBackdrop]="false">
+          <button ly-button ly-menu-item><span><a class="link dim gray" routerLink="/requestqueue">Request Queue</a></span></button>
+          <button ly-button ly-menu-item><span><a class="link dim gray" routerLink="/webscraper">Web Scraper</a></span></button>
+        </ly-menu>
+      </ng-template>
+      <button ly-button><span><a class="link j-link mr3" href="#" (click)="mainMenuItem=MainMenuItemType.Resources" routerLink="/resources" routerLinkActive="active">Resources</a></span></button>
+      <button ly-button><span><a class="link j-link mr3" href="#" (click)="mainMenuItem=MainMenuItemType.Tech" routerLink="/tech" routerLinkActive="active">Tech</a></span></button>
+      <button ly-button><span><a class="link j-link mr3" href="#" (click)="mainMenuItem=MainMenuItemType.Comics" routerLink="/comics" routerLinkActive="active">Comics</a></span></button>
+    </div>
+  </div>
+  <div class="db dtc-l v-mid w-20-l tc tr-l">
+    <a class="link dim silver f6 f5-l dib mr3 mr4-l" href="#" title="Home">Home</a>
+    <a class="link dim silver f6 f5-l dib mr3 mr4-l" href="#" title="About">About</a>
+  </div>
+</nav>
+
+
