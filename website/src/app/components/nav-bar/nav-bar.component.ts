@@ -34,9 +34,10 @@ export class NavBarComponent implements OnInit {
                   // {label: 'Quit'}
                   {label: 'Request Queue', routerLink:"/requestqueue"},
                   {label: 'Web Scraper', routerLink:"/webscraper"}
-                ],
+                ]
+                // ,
               // command:(event) => {mainMenuItem=MainMenuItemType.Widgets}, 
-              routerLink:"/widgetdashboard"
+            //   routerLink:"/widgetdashboard"
           },
           {
               label: 'Resources',

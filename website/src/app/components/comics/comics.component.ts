@@ -40,16 +40,29 @@ export class ComicsComponent implements OnInit {
     {headerName: 'Page Type', field: 'pageType', sortable:true}
   ];
 
-  public rowData = [
-    { make: 'Toyota', model: 'Celica', price: 35000 },
-    { make: 'Ford', model: 'Mondeo', price: 32000 },
-    { make: 'Porsche', model: 'Boxter', price: 72000 }
-  ];
+  public rowData = [];
   
-  constructor(private comicsService:ComicsService) { }
+  private gridApi;
+  private gridColumnApi;
+  public overlayLoadingTemplate;
+  public overlayNoRowsTemplate;
 
+  constructor(private comicsService:ComicsService) { 
+    this.overlayLoadingTemplate =
+      '<span class="ag-overlay-loading-center">Loading...</span>';
+    this.overlayNoRowsTemplate =
+      '<span style="padding: 10px; ">no data</span>';    
+  }
+  
   ngOnInit(): void {
     this.loadSeries();
+  }
+
+  onGridReady(params) {
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
+    // this.gridApi.hideOverlay();
+    this.gridApi.showNoRowsOverlay();
   }
 
   public loadSeries() {
