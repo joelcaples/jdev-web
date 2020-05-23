@@ -32,12 +32,12 @@ export class ComicsComponent implements OnInit {
   public selectedSearchResultsRow:SearchResultsRow;
 
   public columnDefs = [
-    {headerName: 'Series', field: 'seriesName' },
-    {headerName: 'Story Line', field: 'storyLineName' },
-    {headerName: 'Story Arc', field: 'storyArcName'},
-    {headerName: 'Issue', field: 'issueNumber'},
-    {headerName: 'Page', field: 'pageNumber'},
-    {headerName: 'Page Type', field: 'pageType'}
+    {headerName: 'Series', field: 'seriesName', sortable:true },
+    {headerName: 'Story Line', field: 'storyLineName', sortable:true },
+    {headerName: 'Story Arc', field: 'storyArcName', sortable:true},
+    {headerName: 'Issue', field: 'issueNumber', sortable:true},
+    {headerName: 'Page', field: 'pageNumber', sortable:true},
+    {headerName: 'Page Type', field: 'pageType', sortable:true}
   ];
 
   public rowData = [
