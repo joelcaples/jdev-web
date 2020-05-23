@@ -15,6 +15,10 @@ import { FormsModule } from '@angular/forms';
 import { AgGridModule } from 'ag-grid-angular';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
+import {MenubarModule} from 'primeng/menubar';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +36,8 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
+    MenubarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

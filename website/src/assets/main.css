@@ -72,6 +72,6 @@ body {
 
 
 
-.j-link:link, .link:visited { color:greenyellow; }
+.j-link:link, .link:visited { color:rgb(58, 59, 55); }
 .j-link:hover { color:royalblue; }
 .j-link:active { color:red; }
