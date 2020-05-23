@@ -1,30 +1,39 @@
 import { Component } from '@angular/core';
 import { MainMenuItemType } from 'src/app/shared/enums/entities.enum';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ThemeVariables, ThemeRef, lyl, StyleRenderer } from '@alyle/ui';
+
+const STYLES = (theme: ThemeVariables, ref: ThemeRef) => {
+  const __ = ref.selectorsOf(STYLES);
+  return {
+    $global: lyl `{
+      body {
+        background-color: ${theme.background.default}
+        color: ${theme.text.default}
+        font-family: ${theme.typography.fontFamily}
+        margin: 0
+        direction: ${theme.direction}
+      }
+    }`,
+    root: lyl `{
+      display: block
+    }`
+  };
+};
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  providers: [StyleRenderer]
 })
 export class AppComponent {
+  readonly classes = this.sRenderer.renderSheet(STYLES, true);
+
   title = 'jdev-web';
   //public pageMode:number=0;
-  public mainMenuItem:MainMenuItemType;
-  public MainMenuItemType=MainMenuItemType;
 
-  constructor(private router:Router) {
+  constructor(readonly sRenderer: StyleRenderer) {
     
-  }
-
-  public getCurrentRoute() {
-      switch(this.router.url) {
-        case '/widgetdashboard':
-        case '/requestqueue':
-        case '/webscraper':
-              return MainMenuItemType.Widgets;
-        default:
-          return MainMenuItemType.Undefined;
-      }
   }
 }
