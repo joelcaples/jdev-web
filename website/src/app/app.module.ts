@@ -13,6 +13,7 @@ import { WidgetDashboardComponent } from './widgets/widget-dashboard/widget-dash
 import { ComicsComponent } from './components/comics/comics.component';
 import { FormsModule } from '@angular/forms';
 import { AgGridModule } from 'ag-grid-angular';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AgGridModule } from 'ag-grid-angular';
     TechComponent,
     ResourcesComponent,
     WidgetDashboardComponent,
-    ComicsComponent
+    ComicsComponent,
+    NavBarComponent
   ],
   imports: [
     FormsModule,
