@@ -17,8 +17,10 @@ export class ComicSearchComponent implements OnInit {
   //public storyLine:StoryLine;
   private _storyLine:StoryLine;
   set storyLine(value:StoryLine) {
-    this._storyLine = value;
-    this.storyLineFound.emit(this.storyLine);
+    if(value?.storyLineId > 0) {
+      this._storyLine = value;
+      this.storyLineFound.emit(this.storyLine);
+    }
   }
   get storyLine() {
     return this._storyLine;

@@ -284,14 +284,21 @@ export class ComicsComponent implements OnInit {
     // this.evt=typeof(event);
     
     if(event?.storyLineId > 0) {
-    this.storyLines=[];
-    this.storyLines.push(Object.assign(event));
-    this.selectedStoryLine = Object.assign(event);
-    this.selectedStoryLineChanged(event)
+      this.storyLines=[];
+      let storyLine = Object.assign(new StoryLine(), event);
+      this.storyLines.push(storyLine);
+      this.selectedStoryLine = storyLine;
+      this.selectedStoryLineChanged(storyLine)
     }
   }
 
+  // this.seriesList = results.map(x => Object.assign(new Series(), x));
 
-
+  getStoryLineDisplayName(storyLine) {
+    if(storyLine !== undefined) {
+      return storyLine.storyLineName;
+    }
+    return "";
+  }
 
 }

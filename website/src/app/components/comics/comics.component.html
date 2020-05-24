@@ -53,7 +53,7 @@
       <div class="dtc pb3">
         <select [(ngModel)]="selectedStoryLine" class="form-control form-control-sm" (ngModelChange)="selectedStoryLineChanged($event)" class="ui-widget" style="width: 100%;" [disabled]="!(storyLines?.length>0)">
           <option value="undefined" >[All]</option>
-          <option *ngFor="let storyLine of storyLines" [ngValue]="storyLine" >{{storyLine?.storyLineName()}}</option>
+          <option *ngFor="let storyLine of storyLines" [ngValue]="storyLine" >{{getStoryLineDisplayName(storyLine)}}</option>
         </select> 
       </div> 
     </div>
