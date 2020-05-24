@@ -72,8 +72,8 @@ $storyLineNameSearchCriteria=isset($_GET["name"]) ? $_GET["name"] : "";
   GROUP BY
     storylines.StoryLineID,
     storylines.StoryLineName
-  ORDER BY storylines.StoryLineName
-  LIMIT 200";
+  ORDER BY storylines.StoryLineName";
+  // LIMIT 200";
 
 // echo $query;
 

@@ -6,7 +6,6 @@ import { StoryArc } from 'src/app/models/comics.storyArc.model';
 import { SearchResultsRow } from 'src/app/models/comics.search-results-row.model';
 import { StoryLine } from 'src/app/models/comics.story-line.model';
 import { ComicsFilter } from 'src/app/shared/enums/comics.enums';
-import { ComicSearchComponent } from 'src/app/components/comics/comic-search/comic-search.component';
 
 @Component({
   selector: 'app-comics',
@@ -89,7 +88,6 @@ export class ComicsComponent implements OnInit {
     }
 
     this.isLoading=true;
-    // this.selectedStoryLine = undefined;
 
     this.comicsService.getStoryLines(
       -1, 
@@ -112,7 +110,6 @@ export class ComicsComponent implements OnInit {
 
   public loadStoryArcs(clearValues:boolean) {
 
-
     if(clearValues) {
       this.storyArcs=[];
       this.selectedStoryArc = undefined;
@@ -120,7 +117,6 @@ export class ComicsComponent implements OnInit {
     }
 
     this.isLoading=true;
-    // this.selectedStoryArc = undefined;
 
     this.comicsService
     .getStoryArcs(
@@ -138,8 +134,6 @@ export class ComicsComponent implements OnInit {
   }
 
   public loadIssues(clearValues:boolean) {
-    // if(this.isLoading)
-    //   return;
 
     if(clearValues) {
       this.issues=[];
@@ -148,9 +142,6 @@ export class ComicsComponent implements OnInit {
     }
 
     this.isLoading=true;
-
-    // console.log("loadIssues (2)");
-    // console.log(this.selectedSeries?.seriesId);
 
     if(this.selectedSeries?.seriesId !== undefined)
       
@@ -191,20 +182,6 @@ export class ComicsComponent implements OnInit {
     },(e=>console.log(e)));
 
     this.gridApi.hideOverlay();
-
-    // this.comicsService
-    //   .searchRaw(
-    //     this.selectedSeries === undefined ? -1 : this.selectedSeries.seriesId, 
-    //     this.selectedIssue === undefined ? -1 : this.selectedIssue.issueId, 
-    //     this.selectedStoryArc === undefined ? -1 : this.selectedStoryArc.storyArcId, 
-    //     this.selectedStoryLine === undefined ? -1 : this.selectedStoryLine.storyLineId 
-    //     )
-    //   .subscribe(results  => {
-    
-    //     // this.searchResults = results.map(x => Object.assign(new SearchResultsRow(), x));
-    //     // this.searchResults = this.searchResults.concat(results.slice(0,50));
-    //     this.rowData = results;
-    // },(e=>console.log(e)));
   }
 
   public selectedSeriesChanged(e) {
@@ -231,31 +208,20 @@ export class ComicsComponent implements OnInit {
 
     let clearValues = (e===undefined && filter===ComicsFilter.Series);
 
-    // if(e===undefined && filter===ComicsFilter.Series) {
-
-    // }
-
     let p1 = (
-//        e!==undefined && 
         filter!==ComicsFilter.StoryLine)
       ? new Promise(() => this.loadStoryLines(clearValues))
       : new Promise(()=>{return;});
 
     let p2 = (
-//        e!==undefined && 
         filter!==ComicsFilter.StoryArc) 
       ? new Promise(() => this.loadStoryArcs(clearValues))
       : new Promise(()=>{return;});
 
       let p3 = (
- //       e!==undefined && 
         filter!==ComicsFilter.Issue)
       ? new Promise(() => this.loadIssues(clearValues))
       : new Promise(()=>{return;});
-
-      // let p1 = (e!==undefined && filter!==ComicsFilter.Page)
-      // ? new Promise(() => this.loadPages(reload))
-      // : new Promise(()=>{return;});
 
     let p4 = new Promise(() => this.search());
 
@@ -272,27 +238,15 @@ export class ComicsComponent implements OnInit {
     .catch(err=>console.log(err)))
   }
 
-  public evt;
-  public foundStoryLineSearchResult(event) {
-    //alert("foundStoryLineSearchResult()");
-
-
-
-    // this.storyLines=[];
-    // this.storyLines.push(Object.assign(event));
-    // this.selectedStoryLine = Object.assign(event);
-    // this.evt=typeof(event);
-    
+  public foundStoryLineSearchResult(event) {    
     if(event?.storyLineId > 0) {
       this.storyLines=[];
       let storyLine = Object.assign(new StoryLine(), event);
       this.storyLines.push(storyLine);
-      this.selectedStoryLine = storyLine;
+      this.selectedStoryLine = storyLine;      
       this.selectedStoryLineChanged(storyLine)
     }
   }
-
-  // this.seriesList = results.map(x => Object.assign(new Series(), x));
 
   getStoryLineDisplayName(storyLine) {
     if(storyLine !== undefined) {
