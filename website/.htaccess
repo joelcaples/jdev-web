@@ -1,0 +1,7 @@
+# Turn rewrite engine on
+Options +FollowSymlinks
+RewriteEngine on
+
+# map neat URL to internal URL
+RewriteRule ^api/series/list/$   			series-service.php [nc,qsa]
+RewriteRule ^api/series/list/([0-9]+)/$   	series-service.php?mode=single&id=$1 [nc,qsa]
