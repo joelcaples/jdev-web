@@ -19,8 +19,6 @@ export class ComicSearchComponent implements OnInit {
 
   }
 
-
-  
   set storyLine(value:StoryLine) {
     if(value?.storyLineId > 0) {
       this.storyLineFound.emit(value);
