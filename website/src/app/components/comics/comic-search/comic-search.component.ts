@@ -13,17 +13,19 @@ import { ComicsService } from 'src/app/services/comics.service';
 })
 export class ComicSearchComponent implements OnInit {
 
-  // @Input()
-  // selectedSeries:Series;
-  // @Input()
-  // selectedIssue:Issue;
-  // @Input()
-  // selectedStoryArc:StoryArc;
+  //public storyLine:StoryLine;
+  private _storyLine:StoryLine;
+  set storyLine(value:StoryLine) {
+    this._storyLine = value;
+    this.storyLineFound.emit(this.storyLine);
+  }
+  get storyLine() {
+    return this._storyLine;
+  }
+  results: StoryLine[];
 
-  private storyLineNameSearchCriteria:string;
-  public storyLineSearch:StoryLine;
+  public storyLineNameSearchCriteria:string;
 
-  // @Input() storyLineSearchResult: StoryLine;
   @Output() storyLineFound = new EventEmitter<StoryLine>();
   
   constructor(private comicsService:ComicsService) { }
@@ -32,23 +34,16 @@ export class ComicSearchComponent implements OnInit {
 
   }
 
-  filteredStoryLineSingle: StoryLine[];
-
-  filterStoryLineSingle(event) {
+  search(event) {
       let query = event.query;
 
-        this.comicsService.getStoryLinesPromise(
-          // -1, 
-          // this.selectedSeries?.seriesId, 
-          // this.selectedIssue?.issueId, 
-          // -1,
-          // this.selectedStoryArc?.storyArcId,
-          this.storyLineNameSearchCriteria
-        )    
-        .then(storyLines => {
-          this.filteredStoryLineSingle = this.filterStoryLine(query, storyLines);
-          // this.storyLineFound.emit(this.filteredStoryLineSingle[0]);
-        });
+      this.comicsService.getStoryLinesPromise(
+        this.storyLineNameSearchCriteria
+      )    
+      .then(storyLines => {
+        this.results = this.filterStoryLine(query, storyLines);
+        // this.storyLineFound.emit(this.filteredStoryLineSingle[0]);
+      });
   }
 
   filterStoryLine(query, storyLines: any[]):any[] {
@@ -63,6 +58,6 @@ export class ComicSearchComponent implements OnInit {
   }
 
   storyLineFoundInternal($event) {
-    // this.storyLineFound.emit(this.storyLineSearch);
+    // this.storyLineFound.emit(this.storyLine);
   }
 }

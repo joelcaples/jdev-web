@@ -33,7 +33,8 @@ export class NavBarComponent implements OnInit {
                   // {label: 'Open'},
                   // {label: 'Quit'}
                   {label: 'Request Queue', routerLink:"/requestqueue"},
-                  {label: 'Web Scraper', routerLink:"/webscraper"}
+                  {label: 'Web Scraper', routerLink:"/webscraper"},
+                  {label: 'Auto Complete Demo', routerLink:"/autocompletedemo"}
                 ]
                 // ,
               // command:(event) => {mainMenuItem=MainMenuItemType.Widgets}, 
@@ -75,7 +76,8 @@ export class NavBarComponent implements OnInit {
       case '/widgetdashboard':
       case '/requestqueue':
       case '/webscraper':
-            return MainMenuItemType.Widgets;
+      case '/autocompletedemo':
+        return MainMenuItemType.Widgets;
       default:
         return MainMenuItemType.Undefined;
     }

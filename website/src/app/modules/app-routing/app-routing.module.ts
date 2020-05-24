@@ -7,6 +7,7 @@ import { TechComponent } from 'src/app/components/tech/tech.component';
 import { ResourcesComponent } from 'src/app/components/resources/resources.component';
 import { WidgetDashboardComponent } from 'src/app/widgets/widget-dashboard/widget-dashboard.component';
 import { ComicsComponent } from 'src/app/components/comics/comics.component'
+import { AutoCompleteDemoComponent } from 'src/app/widgets/autocompletedemo/autocompletedemo.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -15,6 +16,7 @@ const routes: Routes = [
   // { path: 'heroes', component: HeroesComponent }
   { path: 'requestqueue', component: RequestQueueComponent },
   { path: 'webscraper', component: WebScraperComponent },
+  { path: 'autocompletedemo', component: AutoCompleteDemoComponent },
   { path: 'tech', component: TechComponent },
   { path: 'resources', component: ResourcesComponent },
   { path: 'widgetdashboard', component: WidgetDashboardComponent },
