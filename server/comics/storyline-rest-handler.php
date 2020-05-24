@@ -4,10 +4,10 @@ require_once("storyline-logic.php");
 		
 class StoryLineRestHandler extends RestHandlerBase {
 
-	function getAll() {	
+	function getAll($pageid, $seriesid, $issueid, $storyarcid, $storylineid, $storyLineNameSearchCriteria) {	
 
 		$storyLineLogic = new StoryLineLogic();
-		$rawData = $storyLineLogic->getAll();
+		$rawData = $storyLineLogic->getAll($pageid, $seriesid, $issueid, $storyarcid, $storylineid, $storyLineNameSearchCriteria);
 
 		if(empty($rawData)) {
 			$statusCode = 404;

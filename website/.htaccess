@@ -3,5 +3,5 @@ Options +FollowSymlinks
 RewriteEngine on
 
 # map neat URL to internal URL
-RewriteRule ^api/series/list/$   			series-service.php [nc,qsa]
-RewriteRule ^api/series/list/([0-9]+)/$   	series-service.php?mode=single&id=$1 [nc,qsa]
+RewriteRule ^api/storylines/$   			storyline-controller.php [nc,qsa]
+RewriteRule ^api/storylines/([0-9]+)/$   	storyline-controller.php?storylineid=$1 [nc,qsa]

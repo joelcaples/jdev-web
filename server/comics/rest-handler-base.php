@@ -1,18 +1,14 @@
 <?php 
-// RestHandlerBase
 /*
 A simple RESTful webservices base class
-Use this as a template and build upon it
+
+https://phppot.com/php/php-restful-web-service/
 */
 class RestHandlerBase {
 	
 	private $httpVersion = "HTTP/1.1";
 
 	public function setHttpHeaders($contentType, $statusCode){
-    // echo "here2"."<br>";
-    // echo $contentType."<br>";
-    // echo $statusCode."<br>";
-    // return;
 		
 		$statusMessage = $this -> getHttpStatusMessage($statusCode);
 		

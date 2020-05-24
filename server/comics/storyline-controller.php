@@ -1,8 +1,15 @@
 <?php
 require_once("storyline-rest-handler.php");
 
+$pageid=isset($_GET["pageid"]) ? $_GET["pageid"] : "";
+$seriesid=isset($_GET["seriesid"]) ? $_GET["seriesid"] : "";
+$issueid=isset($_GET["issueid"]) ? $_GET["issueid"] : "";
+$storyarcid=isset($_GET["storyarcid"]) ? $_GET["storyarcid"] : "";
+$storylineid=isset($_GET["storylineid"]) ? $_GET["storylineid"] : "";
+$storyLineNameSearchCriteria=isset($_GET["name"]) ? $_GET["name"] : "";
+
 $storyLineRestHandler = new StoryLineRestHandler();
-$storyLineRestHandler->getAll();
+$storyLineRestHandler->getAll($pageid, $seriesid, $issueid, $storyarcid, $storylineid, $storyLineNameSearchCriteria);
 
 
 // $view = "";

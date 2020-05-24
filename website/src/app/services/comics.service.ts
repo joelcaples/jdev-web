@@ -56,7 +56,7 @@ export class ComicsService {
   ):Observable<StoryLine[]> {
 
     return this.http
-      .get<StoryLine[]>(`http://localhost/server/comics/storylines.php?pageid=${pageId>-1?pageId:""}&seriesid=${(seriesId>-1?seriesId:"")}&issueid=${(issueId>-1?issueId:"")}&storyarcid=${(storyArcId>-1?storyArcId:"")}&storylineid=${(storyLineId>-1?storyLineId:"")}&name=${(storyLineNameSearchCriteria)}`)
+      .get<StoryLine[]>(`http://localhost/server/comics/storyline-controller.php?pageid=${pageId>-1?pageId:""}&seriesid=${(seriesId>-1?seriesId:"")}&issueid=${(issueId>-1?issueId:"")}&storyarcid=${(storyArcId>-1?storyArcId:"")}&storylineid=${(storyLineId>-1?storyLineId:"")}&name=${(storyLineNameSearchCriteria)}`)
       .pipe(map(results=><StoryLine[]>results));
   }  
 

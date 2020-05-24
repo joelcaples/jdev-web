@@ -4,7 +4,7 @@ A domain Class to demonstrate RESTful web services
 */
 Class StoryLineLogic {
 
-  public function getAll() {
+  public function getAll($pageid, $seriesid, $issueid, $storyarcid, $storylineid, $storyLineNameSearchCriteria) {
 
     // $pageid=isset($_GET["pageid"]) ? $_GET["pageid"] : "";
     // $seriesid=isset($_GET["seriesid"]) ? $_GET["seriesid"] : "";
@@ -39,29 +39,29 @@ Class StoryLineLogic {
         ON series.SeriesID = issues.SeriesID 
       WHERE 1";
   
-    // if($pageid != "") {
-    //   $query = $query." AND pagestoryarcs.PageID = ".$pageid; 
-    // }
+    if($pageid != "") {
+      $query = $query." AND pagestoryarcs.PageID = ".$pageid; 
+    }
             
-    // if($seriesid != "") {
-    //   $query = $query." AND series.SeriesID = ".$seriesid; 
-    // }
+    if($seriesid != "") {
+      $query = $query." AND series.SeriesID = ".$seriesid; 
+    }
   
-    // if($issueid != "") {
-    //   $query = $query." AND issues.IssueID = ".$issueid;
-    // }
+    if($issueid != "") {
+      $query = $query." AND issues.IssueID = ".$issueid;
+    }
   
-    // if($storyarcid != "") {
-    //   $query = $query." AND storyArcs.StoryArcID = ".$storyarcid; 
-    // }
+    if($storyarcid != "") {
+      $query = $query." AND storyArcs.StoryArcID = ".$storyarcid; 
+    }
   
-    // if($storylineid != "") {
-    //   $query = $query." AND storyLines.StoryLineID = ".$storylineid; 
-    // }
+    if($storylineid != "") {
+      $query = $query." AND storyLines.StoryLineID = ".$storylineid; 
+    }
   
-    // if($storyLineNameSearchCriteria != "") {
-    //   $query = $query." AND storyLines.StoryLineName LIKE %".$storylineid."%"; 
-    // }
+    if($storyLineNameSearchCriteria != "") {
+      $query = $query." AND storyLines.StoryLineName LIKE %".$storylineid."%"; 
+    }
     
     $query = $query." 
     GROUP BY
