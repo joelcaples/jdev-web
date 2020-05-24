@@ -13,6 +13,7 @@ import { ComicsService } from 'src/app/services/comics.service';
 })
 export class ComicSearchComponent implements OnInit {
 
+
   //public storyLine:StoryLine;
   private _storyLine:StoryLine;
   set storyLine(value:StoryLine) {
@@ -22,12 +23,14 @@ export class ComicSearchComponent implements OnInit {
   get storyLine() {
     return this._storyLine;
   }
-  results: StoryLine[];
+  // results: StoryLine[];
 
   public storyLineNameSearchCriteria:string;
 
   @Output() storyLineFound = new EventEmitter<StoryLine>();
   
+  results: any[];
+
   constructor(private comicsService:ComicsService) { }
 
   ngOnInit(): void {
@@ -35,27 +38,51 @@ export class ComicSearchComponent implements OnInit {
   }
 
   search(event) {
-      let query = event.query;
-
+    let query = event.query;        
+    // this.countryService.getCountries().then(countries => {
+    //     this.filteredCountriesSingle = this.filterCountry(query, countries);
+    // });
       this.comicsService.getStoryLinesPromise(
         this.storyLineNameSearchCriteria
-      )    
-      .then(storyLines => {
-        this.results = this.filterStoryLine(query, storyLines);
-        // this.storyLineFound.emit(this.filteredStoryLineSingle[0]);
-      });
+      ).then(storyLines=> {
+          this.results = this.filterStoryLine(query, storyLines);
+      });    
   }
 
+  // search(event) {
+  //     let query = event.query;
+
+  //     this.comicsService.getStoryLinesPromise(
+  //       this.storyLineNameSearchCriteria
+  //     )    
+  //     .then(storyLines => {
+  //       this.results = this.filterStoryLine(query, storyLines);
+  //       // this.storyLineFound.emit(this.filteredStoryLineSingle[0]);
+  //     });
+  // }
+
+  // filterStoryLine(query, storyLines: any[]):any[] {
+  //     let filtered : any[] = [];
+  //     for(let i = 0; i < storyLines.length; i++) {
+  //         let storyLine = storyLines[i];
+  //         if (storyLine.storyLineName.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+  //             filtered.push(storyLine);
+  //         }
+  //     }
+  //     return filtered;
+  // }
+
   filterStoryLine(query, storyLines: any[]):any[] {
-      let filtered : any[] = [];
-      for(let i = 0; i < storyLines.length; i++) {
-          let storyLine = storyLines[i];
-          if (storyLine.storyLineName.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-              filtered.push(storyLine);
-          }
-      }
-      return filtered;
-  }
+    //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+    let filtered : any[] = [];
+    for(let i = 0; i < storyLines.length; i++) {
+        let storyLine = storyLines[i];
+        if (storyLine.storyLineName.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+            filtered.push(storyLine);
+        }
+    }
+    return filtered;
+}
 
   storyLineFoundInternal($event) {
     // this.storyLineFound.emit(this.storyLine);

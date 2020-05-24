@@ -7,7 +7,7 @@
       <div class="dt-row ph3 w-100">
         <div class="dtc w-100">
 
-          <p-autoComplete
+          <!-- <p-autoComplete
             [(ngModel)]="storyLine"
             [suggestions]="results" 
             (completeMethod)="search($event)" 
@@ -17,9 +17,31 @@
             [minLength]="2"
             (change)="storyLineFoundInternal(storyLine)">            
 
+          </p-autoComplete> -->
+
+          <p-autoComplete 
+            [(ngModel)]="storyLine" 
+            [suggestions]="results" 
+            (completeMethod)="search($event)" 
+            field="storyLineName" 
+            [size]="30"
+            placeholder="Storyline" 
+            [minLength]="2">
+          
           </p-autoComplete>
+  
+
         </div>
       </div>          
     </div>
   </div>
+
+  <!-- <div class="dt-row">
+    <div class="dtc pr2 pb1 pt2">
+      <p-autoComplete [(ngModel)]="country" [suggestions]="filteredCountriesSingle" (completeMethod)="filterCountrySingle($event)" field="name" [size]="30"
+        placeholder="Countries" [minLength]="1"></p-autoComplete>
+      <span style="margin-left:10px">Country: {{country ? country.name||country : 'none'}}</span>
+    </div>
+  </div>   -->
+
 </div>

@@ -278,11 +278,17 @@ export class ComicsComponent implements OnInit {
 
 
 
+    // this.storyLines=[];
+    // this.storyLines.push(Object.assign(event));
+    // this.selectedStoryLine = Object.assign(event);
+    // this.evt=typeof(event);
+    
+    if(event?.storyLineId > 0) {
     this.storyLines=[];
     this.storyLines.push(Object.assign(event));
     this.selectedStoryLine = Object.assign(event);
-    this.evt=event;
-    //this.selectedStoryLineChanged(event)
+    this.selectedStoryLineChanged(event)
+    }
   }
 
 
