@@ -97,7 +97,7 @@ export class ComicsService {
   ):Observable<SearchResultsRow[]> {
     
     return this.http
-    .get<SearchResultsRow[]>(`http://localhost/server/comics/search.php?seriesid=${(seriesId>-1?seriesId:"")}&issueid=${(issueId>-1?issueId:"")}&storyarcid=${(storyArcId>-1?storyArcId:"")}&storylineid=${(storyLineId>-1?storyLineId:"")}`)
+    .get<SearchResultsRow[]>(`http://localhost/server/comics/search-controller.php?seriesid=${(seriesId>-1?seriesId:"")}&issueid=${(issueId>-1?issueId:"")}&storyarcid=${(storyArcId>-1?storyArcId:"")}&storylineid=${(storyLineId>-1?storyLineId:"")}`)
     .pipe(map(results=><SearchResultsRow[]>results));
   }  
 

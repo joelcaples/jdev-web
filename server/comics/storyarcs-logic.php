@@ -4,7 +4,7 @@ A domain RESTful web services class
 */
 Class StoryArcLogic {
 
-  public function getAll($pageid, $seriesid, $issueid, $storyarcid, $storylineid, $storyArcNameSearchCriteria) {
+  public function getAll($pageid, $seriesid, $issueid, $storylineid, $storyarcid, $storyArcNameSearchCriteria) {
 
     $ini = parse_ini_file('../app-config.ini');
 

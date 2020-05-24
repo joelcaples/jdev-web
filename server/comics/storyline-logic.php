@@ -4,7 +4,7 @@ A domain RESTful web services class
 */
 Class StoryLineLogic {
 
-  public function getAll($pageid, $seriesid, $issueid, $storyarcid, $storylineid, $storyLineNameSearchCriteria) {
+  public function getAll($pageid, $seriesid, $issueid, $storylineid, $storyarcid, $storyLineNameSearchCriteria) {
 
     $ini = parse_ini_file('../app-config.ini');
   
