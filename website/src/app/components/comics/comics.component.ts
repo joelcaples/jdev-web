@@ -35,11 +35,11 @@ export class ComicsComponent implements OnInit {
     {headerName: 'Series', field: 'seriesName', sortable:true },
     {headerName: 'Story Line', field: 'storyLineName', sortable:true },
     {headerName: 'Story Arc', field: 'storyArcName', sortable:true},
-    {headerName: 'Issue', field: 'issueNumber', sortable:true},
-    {headerName: 'Page', field: 'pageNumber', sortable:true},
-    {headerName: 'Page Type', field: 'pageType', sortable:true}
+    {headerName: 'Start', field: 'firstIssueNumber', sortable:true, maxWidth:90 },
+    {headerName: 'End', field: 'lastIssueNumber', sortable:true, maxWidth:90 },
+    {headerName: 'Page Count', field: 'pageCount', sortable:true, maxWidth:100 }
   ];
-
+    
   public rowData = [];
   
   private gridApi;
@@ -253,6 +253,11 @@ export class ComicsComponent implements OnInit {
       return storyLine.storyLineName;
     }
     return "";
+  }
+
+  onPageSizeChanged(value) {
+    this.gridApi.paginationProxy.setPageSize();
+    this.gridApi.paginationSetPageSize(Number(value));
   }
 
 }

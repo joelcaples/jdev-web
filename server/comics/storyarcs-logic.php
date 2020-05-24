@@ -66,8 +66,8 @@ Class StoryArcLogic {
     storyarcs.LastQuickPickDate,
     storyarcs.CreationDate, 
     storyarcs.ModificationDate
-  ORDER BY issues.IssueNumber, pages.PageNumber, storyarcs.StoryArcName, storylines.StoryLineName 
-  LIMIT 200";
+  ORDER BY issues.IssueNumber, pages.PageNumber, storyarcs.StoryArcName, storylines.StoryLineName"; 
+  //LIMIT 200";
 
   // echo $query;
 

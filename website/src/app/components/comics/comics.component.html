@@ -7,13 +7,21 @@
       [rowData]="searchResults"
       [columnDefs]="columnDefs"
       [pagination]="true"
-      [paginationPageSize]="10"
-      [paginationAutoPageSize]="true"
+      [paginationPageSize]="50"
       (gridReady)="onGridReady($event)"
       [overlayLoadingTemplate]="overlayLoadingTemplate"
       [overlayNoRowsTemplate]="overlayNoRowsTemplate"
       >  
     </ag-grid-angular>
+    <div class="test-header fr pt1">
+      Page Size:
+      <select (change)="onPageSizeChanged($event.target.value)" id="page-size">
+        <option value="10" selected="">10</option>
+        <option value="100">100</option>
+        <option value="500">500</option>
+        <option value="1000">1000</option>
+      </select>
+    </div>    
   </div>
 </div>
 

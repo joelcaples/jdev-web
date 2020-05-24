@@ -15,26 +15,28 @@ Class SearchLogic {
       $ini['db_name']
     );
 
-    $pages = [];
-    $query = "SELECT
-                series.SeriesID, series.SeriesName,
-                issues.IssueID, issues.IssueNumber, issues.FilePath,
-                pages.PageID, pages.PageNumber, pages.PageType, Pages.PageFileName,
-                storyarcs.StoryArcID, storyarcs.StoryArcName, storyarcs.IsUnnamed, 
-                storyarcs.LastQuickPickDate, 
-                storylines.StoryLineID,storylines.StoryLineName
-              FROM series
-              INNER JOIN issues 
-              INNER JOIN pages
-              INNER JOIN pagestoryarcs 
-              INNER JOIN storyArcs
-              INNER JOIN storylines
-              ON storyArcs.StoryLineID = storylines.StoryLineID 
-              ON pageStoryArcs.StoryArcID = storyarcs.StoryArcID 
-              ON pages.PageId = pageStoryArcs.PageId
-              ON issues.IssueID = pages.IssueID
-              ON series.SeriesID = issues.SeriesID
-              WHERE 1";
+    $results = [];
+    $query = "
+      SELECT
+        series.SeriesID, series.SeriesName,
+        storyarcs.StoryArcID, storyarcs.StoryArcName, storyarcs.IsUnnamed, 
+        storyarcs.LastQuickPickDate, 
+        storylines.StoryLineID,storylines.StoryLineName,
+        MIN(issues.IssueNumber) As firstIssueNumber,
+        MAX(issues.IssueNumber) As lastIssueNumber,
+        COUNT(pages.PageID) AS pageCount
+      FROM series
+      INNER JOIN issues 
+      INNER JOIN pages
+      INNER JOIN pagestoryarcs 
+      INNER JOIN storyArcs
+      INNER JOIN storylines
+      ON storyArcs.StoryLineID = storylines.StoryLineID 
+      ON pageStoryArcs.StoryArcID = storyarcs.StoryArcID 
+      ON pages.PageId = pageStoryArcs.PageId
+      ON issues.IssueID = pages.IssueID
+      ON series.SeriesID = issues.SeriesID
+      WHERE 1";
 
     if($seriesid != "") {
       $query = $query." AND series.SeriesID = ".$seriesid; 
@@ -52,39 +54,38 @@ Class SearchLogic {
       $query = $query." AND storyLines.StoryLineID = ".$storylineid; 
     }
 
-    $query = $query." ORDER BY 
-      series.seriesName,
-      storylines.StoryLineName,
-      issues.IssueNumber,
-      storyarcs.StoryArcName,
-      pages.PageNumber
-      LIMIT 500";
+    $query = $query."
+      GROUP BY
+        series.SeriesID, series.SeriesName,
+        storyarcs.StoryArcID, storyarcs.StoryArcName, storyarcs.IsUnnamed, 
+        storyarcs.LastQuickPickDate, 
+        storylines.StoryLineID,storylines.StoryLineName
+      ORDER BY 
+        series.seriesName,
+        issues.issueNumber,
+        storylines.StoryLineName,
+        storyarcs.StoryArcName";
 
-  //echo $query;
+//  echo $query;
 
     if ($result = $mysqli->query($query)) {
 
       $i = 0;
       while($row = mysqli_fetch_assoc($result)) {
-        $pages[$i]['seriesId'] = $row['SeriesID'];
-        $pages[$i]['seriesName'] = $row['SeriesName'];
+        $results[$i]['seriesId'] = $row['SeriesID'];
+        $results[$i]['seriesName'] = $row['SeriesName'];
 
-        $pages[$i]['issueId'] = $row['IssueID'];
-        $pages[$i]['issueNumber'] = $row['IssueNumber'];
-        $pages[$i]['filePath'] = $row['FilePath'];
+        $results[$i]['firstIssueNumber'] = $row['firstIssueNumber'];
+        $results[$i]['lastIssueNumber'] = $row['lastIssueNumber'];
+        $results[$i]['pageCount'] = $row['pageCount'];
 
-        $pages[$i]['pageId'] = $row['PageID'];
-        $pages[$i]['pageNumber'] = $row['PageNumber'];
-        $pages[$i]['pageType'] = $row['PageType'];
-        $pages[$i]['pageFileName'] = $row['PageFileName'];
+        $results[$i]['storyArcId'] = $row['StoryArcID'];
+        $results[$i]['storyArcName'] = $row['StoryArcName'];
+        $results[$i]['isUnnamed'] = $row['IsUnnamed'];
+        $results[$i]['lastQuickPickDate'] = $row['LastQuickPickDate'];
 
-        $pages[$i]['storyArcId'] = $row['StoryArcID'];
-        $pages[$i]['storyArcName'] = $row['StoryArcName'];
-        $pages[$i]['isUnnamed'] = $row['IsUnnamed'];
-        $pages[$i]['lastQuickPickDate'] = $row['LastQuickPickDate'];
-
-        $pages[$i]['storyLineId'] = $row['StoryLineID'];
-        $pages[$i]['storyLineName'] = $row['StoryLineName'];
+        $results[$i]['storyLineId'] = $row['StoryLineID'];
+        $results[$i]['storyLineName'] = $row['StoryLineName'];
 
         $i++;
       }
@@ -92,7 +93,7 @@ Class SearchLogic {
       $result->close();
       $mysqli->close();
 
-      echo json_encode($pages);
+      return $results;
     } else {
       http_response_code(404);
     }
