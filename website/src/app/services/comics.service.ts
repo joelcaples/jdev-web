@@ -70,7 +70,7 @@ export class ComicsService {
   ) {
 
     return this.http
-      .get(`http://localhost/server/comics/storylines.php?name=${(storyLineNameSearchCriteria === undefined?"":storyLineNameSearchCriteria)}`)
+      .get(`http://localhost/server/comics/storyline-controller.php?name=${(storyLineNameSearchCriteria === undefined?"":storyLineNameSearchCriteria)}`)
       .toPromise()
       .then(res => <any[]> res)
       .then(data => { return data; });

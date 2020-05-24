@@ -4,6 +4,11 @@ A simple RESTful webservices base class
 
 https://phppot.com/php/php-restful-web-service/
 */
+
+// header("Access-Control-Allow-Origin: *");
+// header("Access-Control-Allow-Methods: PUT, GET, POST, DELETE");
+// header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+
 class RestHandlerBase {
 	
 	private $httpVersion = "HTTP/1.1";
