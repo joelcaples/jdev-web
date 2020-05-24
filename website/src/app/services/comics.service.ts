@@ -61,16 +61,16 @@ export class ComicsService {
   }  
 
   public getStoryLinesPromise(
-    pageId:number,    
-    seriesId:number,
-    issueId:number,
-    storyLineId:number,
-    storyArcId:number,
+    // pageId:number,    
+    // seriesId:number,
+    // issueId:number,
+    // storyLineId:number,
+    // storyArcId:number,
     storyLineNameSearchCriteria:string
   ) {
 
     return this.http
-      .get(`http://localhost/server/comics/storylines.php?pageid=${pageId>-1?pageId:""}&seriesid=${(seriesId>-1?seriesId:"")}&issueid=${(issueId>-1?issueId:"")}&storyarcid=${(storyArcId>-1?storyArcId:"")}&storylineid=${(storyLineId>-1?storyLineId:"")}&name=${(storyLineNameSearchCriteria === undefined?"":storyLineNameSearchCriteria)}`)
+      .get(`http://localhost/server/comics/storylines.php?name=${(storyLineNameSearchCriteria === undefined?"":storyLineNameSearchCriteria)}`)
       .toPromise()
       .then(res => <any[]> res)
       .then(data => { return data; });

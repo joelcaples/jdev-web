@@ -1,1 +1,22 @@
-<p>comic-search works!</p>
+<div class="w-80 dt-table">
+  <div class="dt-row">
+    <div class="dtc pr2 pb1 pt2">
+      <div class="f6 b db mb2">Search:</div>
+    </div>
+    <div class="dtc">
+      <div class="dt-row ph3 w-100">
+        <div class="dtc w-100">
+          <p-autoComplete
+            [(ngModel)]="storyLineSearch"
+            [suggestions]="filteredStoryLineSingle" 
+            (completeMethod)="filterStoryLineSingle($event)" 
+            field="storyLineName" [size]="30"
+            placeholder="Storyline" [minLength]="2"
+            (change)="storyLineFoundInternal(filteredStoryLineSingle)">            
+
+          </p-autoComplete>
+        </div>
+      </div>          
+    </div>
+  </div>
+</div>

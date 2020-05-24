@@ -1,23 +1,6 @@
-<div class="w-80 dt-table">
-  <div class="dt-row">
-    <div class="dtc pr2">
-      <h3>Search:</h3>
-    </div>
-    <div class="dtc">
-      <div class="dt-row ph3 w-100">
-        <div class="dtc w-100">
-          <p-autoComplete
-            [(ngModel)]="storyLineSearch"
-            [suggestions]="filteredStoryLineSingle" 
-            (completeMethod)="filterStoryLineSingle($event)" 
-            field="storyLineName" [size]="30"
-            placeholder="Storyline" [minLength]="2">
-          </p-autoComplete>
-          <!-- (ngModelChange)="selectedStoryLineChanged($event)"  -->
-        </div>
-      </div>          
-    </div>
-  </div>
+<comic-search (storyLineFound)=foundStoryLineSearchResult($event)></comic-search>
+<div class="fl w-80">
+  xx{{evt}}xx
 </div>
 <div class="fl w-80">
   <div id="myGrid" class="ag-theme-alpine">
@@ -48,7 +31,7 @@
     <div class="dt-table">
 
       <div class="dt-row ph3 w-100">
-        <label for="name" class="f6 b db mb2">Series</label>
+        <div class="f6 b db mb2">Series</div>
       </div>
       <div class="dt-row ph3 w-100">
         <div class="dtc pb3">
@@ -63,7 +46,7 @@
       </div>
       
     <div class="dt-row ph3 w-100">
-      <label for="name" class="f6 b db mb2">Story Line</label>
+      <div class="f6 b db mb2">Story Line</div>
     </div>
     <div class="dt-row ph3 w-100">
       <div class="dtc pb3">
@@ -82,7 +65,7 @@
     </div> -->
   
     <div class="dt-row ph3 w-100">
-      <label for="name" class="f6 b db mb2">Story Arc</label>
+      <div class="f6 b db mb2">Story Arc</div>
     </div>
     <div class="dt-row ph3 w-100">
       <div class="dtc pb3">
@@ -97,7 +80,7 @@
   </div>
     
     <div class="dt-row ph3 w-100">
-      <label for="name" class="f6 b db mb2">Issue</label>
+      <div class="f6 b db mb2">Issue</div>
     </div>
     <div class="dt-row ph3 w-100">
       <div class="dtc pb3">
