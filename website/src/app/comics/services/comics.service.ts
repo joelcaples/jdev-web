@@ -22,6 +22,12 @@ export class ComicsService {
     .pipe(map(results=><Series[]>results));
   }  
 
+  public findSeries(storyLineId:number, storyArcId:number):Observable<Series[]> {
+    return this.http
+    .get<Series[]>(`http://localhost/server/comics/series-controller.php?endpoint=find&storylineid=${(storyLineId>-1?storyLineId:"")}&storyArcId=${(storyArcId!==null&&storyArcId>-1?storyArcId:"")}`)
+    .pipe(map(results=><Series[]>results));
+  }  
+
   public getIssues(
     seriesId:number,
     issueId:number,
@@ -100,15 +106,5 @@ export class ComicsService {
     .get<SearchResultsRow[]>(`http://localhost/server/comics/search-controller.php?seriesid=${(seriesId>-1?seriesId:"")}&issueid=${(issueId>-1?issueId:"")}&storyarcid=${(storyArcId>-1?storyArcId:"")}&storylineid=${(storyLineId>-1?storyLineId:"")}`)
     .pipe(map(results=><SearchResultsRow[]>results));
   }  
-
-  // public searchRaw(
-  //   seriesId:number, 
-  //   issueId:number, 
-  //   storyArcId:number, 
-  //   storyLineId:number) {
-    
-  //   return this.http
-  //   .get(`http://localhost/server/comics/search.php?seriesid=${(seriesId>-1?seriesId:"")}&issueid=${(issueId>-1?issueId:"")}&storyarcid=${(storyArcId>-1?storyArcId:"")}&storylineid=${(storyLineId>-1?storyLineId:"")}`)
-  // }  
 
 }

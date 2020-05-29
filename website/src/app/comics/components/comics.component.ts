@@ -241,8 +241,16 @@ export class ComicsComponent implements OnInit {
     .catch(err=>console.log(err)))
   }
 
-  public foundStoryLineSearchResult(event) {    
+  public foundStoryLineSearchResult(event:StoryLine) {    
     if(event?.storyLineId > 0) {
+
+      this.comicsService
+        .findSeries(event.storyLineId, null)
+        .subscribe(results => {      
+        let series = results.map(x => Object.assign(new Series(), x))[0];
+        this.selectedSeries = this.seriesList.find(s=>s.seriesId==series.seriesId);
+      },(e=>console.log(e)));
+
       this.storyLines=[];
       let storyLine = Object.assign(new StoryLine(), event);
       this.storyLines.push(storyLine);
