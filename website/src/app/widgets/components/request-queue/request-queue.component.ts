@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Values } from '../models/values.model';
-import { ValuesService } from '../services/values.service';
+import { Values } from 'src/app/widgets/models/values.model';
+import { ValuesService } from 'src/app/widgets/services/values.service';
 
 @Component({
   selector: 'request-queue',

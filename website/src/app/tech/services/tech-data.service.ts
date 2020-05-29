@@ -11,7 +11,7 @@ export class TechDataService {
   constructor(private http: HttpClient) {}
 
   public getTechData():Observable<TechData> {
-      return this.http.get<TechData>("./assets/data/tech-data.json");
+      return this.http.get<TechData>("../assets/data/tech-data.json");
   }
 
 }

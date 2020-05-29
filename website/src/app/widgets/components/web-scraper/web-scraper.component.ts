@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { WebRequestService } from 'src/app/services/web-request.service';
+import { WebRequestService } from 'src/app/widgets/services/web-request.service';
 import { HttpClient } from '@angular/common/http';
-import { WebResponse } from 'src/models/web-response.model';
+import { WebResponse } from 'src/app/widgets/models/web-response.model';
 
 @Component({
   selector: 'web-scraper',

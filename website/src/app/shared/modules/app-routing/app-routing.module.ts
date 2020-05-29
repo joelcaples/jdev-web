@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { RequestQueueComponent } from 'src/app/widgets/request-queue/request-queue.component';
-import { WebScraperComponent } from 'src/app/widgets/web-scraper/web-scraper.component';
-import { TechComponent } from 'src/app/components/tech/tech.component';
-import { ResourcesComponent } from 'src/app/components/resources/resources.component';
-import { WidgetDashboardComponent } from 'src/app/widgets/widget-dashboard/widget-dashboard.component';
-import { ComicsComponent } from 'src/app/components/comics/comics.component'
-import { AutoCompleteDemoComponent } from 'src/app/widgets/autocompletedemo/autocompletedemo.component';
+import { RequestQueueComponent } from 'src/app/widgets/components/request-queue/request-queue.component';
+import { WebScraperComponent } from 'src/app/widgets/components/web-scraper/web-scraper.component';
+import { TechComponent } from '../../../tech/components/tech.component';
+import { ResourcesComponent } from '../../../resources/components/resources.component';
+import { WidgetDashboardComponent } from 'src/app/widgets/components/widget-dashboard/widget-dashboard.component';
+import { ComicsComponent } from '../../../comics/components/comics.component'
+import { AutoCompleteDemoComponent } from 'src/app/widgets/components/autocompletedemo/autocompletedemo.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/dashboard', pathMatch: 'full' },

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { StoryLine } from 'src/app/models/comics.story-line.model';
-import { ComicsService } from 'src/app/services/comics.service';
+import { StoryLine } from '../../models/comics.story-line.model';
+import { ComicsService } from '../../services/comics.service';
 
 @Component({
   selector: 'comic-search',

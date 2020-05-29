@@ -7,7 +7,7 @@ export class CountryService {
   constructor(private http: HttpClient) { }
 
     getCountries() {
-    return this.http.get<any>('./assets/data/countries.json')
+    return this.http.get<any>('../assets/data/countries.json')
       .toPromise()
       .then(res => <any[]>res.data)
       .then(data => { return data; })

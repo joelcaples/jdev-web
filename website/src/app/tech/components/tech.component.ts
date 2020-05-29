@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TechDataService } from 'src/app/services/tech-data.service';
-import { Section } from 'src/app/models/tech.model';
+import { TechDataService } from '../services/tech-data.service';
+import { Section } from '../models/tech.model';
 
 @Component({
   selector: 'app-tech',

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Values } from 'src/models/values.model';
+import { Values } from 'src/app/widgets/models/values.model';
 
 @Injectable({
   providedIn: 'root'

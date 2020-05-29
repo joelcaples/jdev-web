@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ComicsService } from 'src/app/services/comics.service';
-import { Series } from 'src/app/models/comics.series.model';
-import { Issue } from 'src/app/models/comics.issue.model';
-import { StoryArc } from 'src/app/models/comics.storyArc.model';
-import { SearchResultsRow } from 'src/app/models/comics.search-results-row.model';
-import { StoryLine } from 'src/app/models/comics.story-line.model';
-import { ComicsFilter } from 'src/app/shared/enums/comics.enums';
+import { ComicsService } from 'src/app/comics/services/comics.service';
+import { Series } from '../models/comics.series.model';
+import { Issue } from '../models/comics.issue.model';
+import { StoryArc } from '../models/comics.storyArc.model';
+import { SearchResultsRow } from '../models/comics.search-results-row.model';
+import { StoryLine } from '../models/comics.story-line.model';
+import { ComicsFilter } from '../enums/comics.enums';
 
 @Component({
   selector: 'app-comics',
