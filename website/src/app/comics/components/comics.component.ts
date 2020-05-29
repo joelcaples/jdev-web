@@ -159,7 +159,10 @@ export class ComicsComponent implements OnInit {
       let selectedIssueId = this.selectedIssue?.issueId ?? -1; 
       this.selectedIssue = this.issues.filter(function (issue) { return issue.issueId === selectedIssueId; })[0] || undefined;
 
-    },(e=>console.log(e)));
+    },(e=>{
+      console.log(e);
+      this.issues=[];
+    }));
 
     this.isLoading=false;
   }

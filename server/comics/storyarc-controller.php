@@ -20,12 +20,12 @@ class StoryArcRestHandler extends RestHandlerBase {
 		$storyArcLogic = new StoryArcLogic();
 		$rawData = $storyArcLogic->getAll($pageid, $seriesid, $issueid,  $storylineid, $storyarcid, $storyArcNameSearchCriteria);
 
-		if(empty($rawData)) {
-			$statusCode = 404;
-			$rawData = array('error' => 'No matches found');		
-		} else {
+		// if(empty($rawData)) {
+		// 	$statusCode = 404;
+		// 	$rawData = array('error' => 'No matches found');		
+		// } else {
 			$statusCode = 200;
-		}
+		// }
 
     $response = $this->encodeJson($rawData);
     echo $response;

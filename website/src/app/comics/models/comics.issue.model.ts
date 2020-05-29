@@ -1,8 +1,9 @@
 export class Issue {
-  issueId: number;
   seriesId: number;
+  issueId: number;
   issueNumber:number;
-  seriesName:string;
+  filePath:string;
+  // seriesName:string;
   displayValue:string;
 
   public getDisplayValue(){

@@ -2,9 +2,9 @@
 /* 
 A domain RESTful web services class
 */
-Class PagesLogic {
+Class IssuesLogic {
 
-  public function getAll($pageid, $seriesid, $issueid, $storylineid, $storyarcid, $storyLineNameSearchCriteria) {
+  public function getAll($pageid, $seriesid, $issueid, $storylineid, $storyarcid) {
 
 
     $ini = parse_ini_file('../app-config.ini');
@@ -68,8 +68,8 @@ Class PagesLogic {
 
       $i = 0;
       while($row = mysqli_fetch_assoc($result)) {
-        $issues[$i]['issueId'] = $row['IssueID'];
         $issues[$i]['seriesId'] = $row['SeriesID'];
+        $issues[$i]['issueId'] = $row['IssueID'];
         $issues[$i]['issueNumber'] = $row['IssueNumber'];
         $issues[$i]['filePath'] = $row['FilePath'];
 
@@ -79,7 +79,7 @@ Class PagesLogic {
       $result->close();
       $mysqli->close();
 
-      echo json_encode($issues);
+      return $issues;
     } else {
       http_response_code(404);
     }

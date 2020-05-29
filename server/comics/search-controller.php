@@ -19,12 +19,12 @@ class SearchRestHandler extends RestHandlerBase {
 		$searchLogic = new SearchLogic();
 		$rawData = $searchLogic->getAll($seriesid, $issueid, $storylineid, $storyarcid);
 
-		if(empty($rawData)) {
-			$statusCode = 404;
-			$rawData = array('error' => 'No matches found');		
-		} else {
+		// if(empty($rawData)) {
+		// 	$statusCode = 404;
+		// 	$rawData = array('error' => 'No matches found');		
+		// } else {
 			$statusCode = 200;
-		}
+		// }
 
     $response = $this->encodeJson($rawData);
     echo $response;

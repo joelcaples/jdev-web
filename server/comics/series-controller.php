@@ -20,12 +20,12 @@ class SeriesRestHandler extends RestHandlerBase {
 		$seriesLogic = new SeriesLogic();
 		$rawData = $seriesLogic->getAll($pageid, $seriesid, $issueid, $storylineid, $storyarcid, $seriesNameSearchCriteria);
 
-		if(empty($rawData)) {
-			$statusCode = 404;
-			$rawData = array('error' => 'No matches found');		
-		} else {
+		// if(empty($rawData)) {
+		// 	$statusCode = 404;
+		// 	$rawData = array('error' => 'No matches found');		
+		// } else {
 			$statusCode = 200;
-		}
+		// }
 
     $response = $this->encodeJson($rawData);
     echo $response;

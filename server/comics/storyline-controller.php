@@ -20,12 +20,12 @@ class StoryLineRestHandler extends RestHandlerBase {
 		$storyLineLogic = new StoryLineLogic();
 		$rawData = $storyLineLogic->getAll($pageid, $seriesid, $issueid, $storylineid, $storyarcid, $storyLineNameSearchCriteria);
 
-		if(empty($rawData)) {
-			$statusCode = 404;
-			$rawData = array('error' => 'No matches found');		
-		} else {
+		// if(empty($rawData)) {
+		// 	$statusCode = 404;
+		// 	$rawData = array('error' => 'No matches found');		
+		// } else {
 			$statusCode = 200;
-		}
+		// }
 
     $response = $this->encodeJson($rawData);
     echo $response;
