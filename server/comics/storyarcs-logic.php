@@ -36,7 +36,8 @@ Class StoryArcLogic {
         ON pages.PageId = pageStoryArcs.PageId 
         ON issues.IssueID = pages.IssueID 
         ON series.SeriesID = issues.SeriesID 
-      WHERE storyArcs.StoryArcName<>''";
+      WHERE 1";
+      #storyArcs.StoryArcName<>''";
 
     if($pageid != "") {
       $query = $query." AND pagestoryarcs.PageID = ".$pageid; 

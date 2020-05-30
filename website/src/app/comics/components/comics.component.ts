@@ -31,6 +31,8 @@ export class ComicsComponent implements OnInit {
   public searchResults:SearchResultsRow[];
   public selectedSearchResultsRow:SearchResultsRow;
 
+  public traceLog = "";
+
   public columnDefs = [
     {headerName: 'Series', field: 'seriesName', sortable:true },
     {headerName: 'Story Line', field: 'storyLineName', sortable:true },
@@ -80,7 +82,6 @@ export class ComicsComponent implements OnInit {
   }
 
   public loadStoryLines(clearValues:boolean) {
-
     if(clearValues) {
       this.storyLines=[];
       this.selectedStoryLine = undefined;
@@ -143,7 +144,7 @@ export class ComicsComponent implements OnInit {
 
     this.isLoading=true;
 
-    if(this.selectedSeries?.seriesId !== undefined)
+    if(this.selectedSeries?.seriesId !== undefined) {
       
       this.comicsService
       .getIssues(
@@ -154,16 +155,16 @@ export class ComicsComponent implements OnInit {
       )
       .subscribe(results => {
       
-      this.issues = results.map(x => Object.assign(new Issue(), x));
+        this.issues = results.map(x => Object.assign(new Issue(), x));
 
-      let selectedIssueId = this.selectedIssue?.issueId ?? -1; 
-      this.selectedIssue = this.issues.filter(function (issue) { return issue.issueId === selectedIssueId; })[0] || undefined;
+        let selectedIssueId = this.selectedIssue?.issueId ?? -1; 
+        this.selectedIssue = this.issues.filter(function (issue) { return issue.issueId === selectedIssueId; })[0] || undefined;
 
-    },(e=>{
-      console.log(e);
-      this.issues=[];
-    }));
-
+      },(e=>{
+        console.log(e);
+        this.issues=[];
+      }));
+    }
     this.isLoading=false;
   }
 
@@ -238,24 +239,33 @@ export class ComicsComponent implements OnInit {
           .catch(err=>console.log(err))
         .catch(err=>console.log(err)))
       .catch(err=>console.log(err)))
-    .catch(err=>console.log(err)))
+    .catch(err=>console.log(err)));
   }
 
   public foundStoryLineSearchResult(event:StoryLine) {    
+
     if(event?.storyLineId > 0) {
 
-      this.comicsService
-        .findSeries(event.storyLineId, null)
-        .subscribe(results => {      
-        let series = results.map(x => Object.assign(new Series(), x))[0];
-        this.selectedSeries = this.seriesList.find(s=>s.seriesId==series.seriesId);
-      },(e=>console.log(e)));
+      var p1 = new Promise((resolve, reject)=>{
+        this.comicsService
+          .findSeries(event.storyLineId, null)
+          .subscribe(results => {      
+          let series = results.map(x => Object.assign(new Series(), x))[0];
+          this.selectedSeries = this.seriesList.find(s=>s.seriesId==series.seriesId);
+          resolve();
+        },(e=>reject(e)));
+      });
 
-      this.storyLines=[];
-      let storyLine = Object.assign(new StoryLine(), event);
-      this.storyLines.push(storyLine);
-      this.selectedStoryLine = storyLine;      
-      this.selectedStoryLineChanged(storyLine)
+      p1.then(()=>{
+        this.storyLines=[];
+        let storyLine = Object.assign(new StoryLine(), event);
+        this.storyLines.push(storyLine);
+        this.selectedStoryLine = storyLine;      
+        // this.selectedStoryLineChanged(storyLine); 
+        this.selectedStoryLine = storyLine;    
+        this.reload(storyLine, ComicsFilter.StoryLine);  
+      });
+  
     }
   }
 

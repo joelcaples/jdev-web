@@ -39,5 +39,5 @@ class StoryArcRestHandler extends RestHandlerBase {
 }
 
 $storyArcRestHandler = new StoryArcRestHandler();
-$storyArcRestHandler->getAll($pageid, $seriesid, $issueid, $storyarcid, $storylineid, $storyArcNameSearchCriteria);
+$storyArcRestHandler->getAll($pageid, $seriesid, $issueid, $storylineid, $storyarcid, $storyArcNameSearchCriteria);
 ?>
