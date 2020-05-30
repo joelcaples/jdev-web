@@ -77,12 +77,9 @@
       <div class="dtc pb3">
         <select [(ngModel)]="selectedStoryArc" class="form-control form-control-sm" (ngModelChange)="selectedStoryArcChanged($event)" class="ui-widget" style="width: 100%;" [disabled]="!(storyArcs?.length>0)">
         <option value="undefined" >[All]</option>
-        <option *ngFor="let storyArc of storyArcs" [ngValue]="storyArc">{{storyArc?.storyArcName}}</option>
+        <option *ngFor="let storyArc of storyArcs" [ngValue]="storyArc">{{storyArc?.storyArcName ? storyArc.storyArcName : "Unnamed"}}</option>
       </select> 
     </div> 
-    <!-- <div class="dtc pa1 b">
-      <p>{{selectedStoryArc?.storyArcName}}</p>
-    </div>  -->
   </div>
     
     <div class="dt-row ph3 w-100">
@@ -93,15 +90,10 @@
         <select [(ngModel)]="selectedIssue" class="form-control form-control-sm" class="ui-widget" style="width: 100%;" (ngModelChange)="selectedIssueChanged($event)" [disabled]="!(issues?.length>0)">
         <option value="undefined" >[All]</option>
         <option *ngFor="let issue of issues" [ngValue]="issue" >
-          <!-- Multiplying float gets rid of trailing zeroes-->
           {{issue.issueNumber * 1}}
         </option>
       </select> 
     </div> 
-    <!-- <div class="dtc pa1 b">
-      <p>{{selectedIssue?.issueNumber}}</p>
-    </div>  -->
   </div>
     
-
 </div> 
